@@ -3,7 +3,7 @@
 
 	Glk interface functions for the Hugo Engine
 
-	Copyright (c) 1999-2004 by Kent Tessman
+	Copyright (c) 1999-2006 by Kent Tessman
 */
 
 
@@ -702,16 +702,13 @@ void hugo_font(int f)
 
 	glk_set_style(style_Normal);
 
-	if (f & BOLD_FONT && f & ITALIC_FONT)
-		glk_set_style(style_Alert);
-
-	else if (f & BOLD_FONT)
-		glk_set_style(style_Subheader);
-
-	else if (f & UNDERLINE_FONT)
+	if (f & BOLD_FONT)
 		glk_set_style(style_Emphasized);
 
-	else if (f & ITALIC_FONT)
+	if (f & UNDERLINE_FONT)
+		glk_set_style(style_Emphasized);
+
+	if (f & ITALIC_FONT)
 		glk_set_style(style_Emphasized);
 
 	if (f & PROP_FONT)
