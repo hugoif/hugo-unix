@@ -1,7 +1,7 @@
 /*
 	-------------------------------------------
 	HUGO ENGINE by Kent Tessman
-	Copyright (c) 1995-2005
+	Copyright (c) 1995-2006
 
 	The General Coffee Company Film Productions
 	-------------------------------------------
@@ -124,7 +124,7 @@ int he_main(int argc, char *argv[])
 
 void Banner(void)
 {
-	printf("HUGO %s v%d.%d%s by Kent Tessman (c) 1995-2005\n",
+	printf("HUGO %s v%d.%d%s by Kent Tessman (c) 1995-2006\n",
 #if defined (DEBUGGER)
 	"DEBUGGER",
 #else

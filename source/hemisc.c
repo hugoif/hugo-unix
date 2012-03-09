@@ -20,7 +20,7 @@
 
 	for the Hugo Engine
 
-	Copyright (c) 1995-2005 by Kent Tessman
+	Copyright (c) 1995-2006 by Kent Tessman
 */
 
 
@@ -1561,8 +1561,10 @@ void PassLocals(int n)
 	int i;
 
 	for (i=0; i<MAXLOCALS; i++)
-		{var[MAXGLOBALS+i] = passlocal[i];
-		passlocal[i] = 0;}
+	{
+		var[MAXGLOBALS+i] = passlocal[i];
+		passlocal[i] = 0;
+	}
 	arguments_passed = n;
 }
 

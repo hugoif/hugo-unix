@@ -13,7 +13,7 @@
 
 	for the Hugo Engine
 
-	Copyright (c) 1995-2005 by Kent Tessman
+	Copyright (c) 1995-2006 by Kent Tessman
 
 	NOTE:  The normal course of action for loading any resource is
 	first to try and find it in the specified resourcefile.  If that
@@ -49,10 +49,14 @@ void hugo_stopvideo(void);
 #endif
 
 
+#ifndef MAX_RES_PATH
+#define MAX_RES_PATH 255
+#endif
+
 HUGO_FILE resource_file;
 int extra_param;
-char loaded_filename[MAXPATH];
-char loaded_resname[MAXPATH];
+char loaded_filename[MAX_RES_PATH];
+char loaded_resname[MAX_RES_PATH];
 char resource_type = 0;
 
 
@@ -67,7 +71,7 @@ char resource_type = 0;
 
 void DisplayPicture(void)
 {
-	char filename[MAXPATH], resname[MAXPATH];
+	char filename[MAX_RES_PATH], resname[MAX_RES_PATH];
 	long reslength;
 
 	GetResourceParameters(filename, resname, PICTURE_T);
@@ -103,7 +107,7 @@ void DisplayPicture(void)
 
 void PlayMusic(void)
 {
-	char filename[MAXPATH], resname[MAXPATH];
+	char filename[MAX_RES_PATH], resname[MAX_RES_PATH];
 	char loop_flag = 0;
 	long resstart, reslength;
 
@@ -194,7 +198,7 @@ Identified:
 
 void PlaySample(void)
 {
-	char filename[MAXPATH], resname[MAXPATH];
+	char filename[MAX_RES_PATH], resname[MAX_RES_PATH];
 	char loop_flag = 0;
 	long reslength;
 
@@ -235,7 +239,7 @@ void PlaySample(void)
 
 void PlayVideo(void)
 {
-	char filename[MAXPATH], resname[MAXPATH];
+	char filename[MAX_RES_PATH], resname[MAX_RES_PATH];
 	char loop_flag = 0, background = 0;
 	int volume = 100;
 	long resstart, reslength;
@@ -325,7 +329,7 @@ Identified:
 
 long FindResource(char *filename, char *resname)
 {
-	char resource_in_file[MAXPATH];
+	char resource_in_file[MAX_RES_PATH];
 	int i, len;
 	int resfileversion, rescount;
 	unsigned int startofdata;

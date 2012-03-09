@@ -5,7 +5,7 @@
 
 	for the Hugo Engine
 
-	Copyright (c) 1995-2005 by Kent Tessman
+	Copyright (c) 1995-2006 by Kent Tessman
 */
 
 

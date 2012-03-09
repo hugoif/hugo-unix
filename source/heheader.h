@@ -4,15 +4,16 @@
 	contains definitions and prototypes
 	for the Hugo Engine
 
-	Copyright (c) 1995-2005 by Kent Tessman
+	Copyright (c) 1995-2006 by Kent Tessman
 */
+
 
 #define HEVERSION 3
 #define HEREVISION 1
 #if !defined (COMPILE_V25)
-#define HEINTERIM ".02"
+#define HEINTERIM ".03"
 #else
-#define HEINTERIM ".02 (2.5)"
+#define HEINTERIM ".03 (2.5)"
 #endif
 
 #include <string.h>
@@ -270,10 +271,6 @@ void arc_colour(unsigned char n, unsigned int c);
 
 #include "glk.h"
 
-#ifdef GARGLK
-#undef WIN32 /* Gargoyle is not WinGlk */
-#endif
-
 #define PORT_NAME "Glk"
 #define PORTER_NAME "Kent Tessman and Andrew Plotkin"
 
@@ -313,8 +310,6 @@ void heglk_printfatalerror(char *err);
 #ifndef isascii
 #define isascii(c)	(1)
 #endif
-#undef tolower
-#undef toupper
 #define tolower(c)      (glk_char_to_lower((unsigned char)c))
 #define toupper(c)      (glk_char_to_upper((unsigned char)c))
 

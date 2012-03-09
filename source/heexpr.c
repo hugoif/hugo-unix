@@ -14,7 +14,7 @@
 
 	for the Hugo Engine
 
-	Copyright (c) 1995-2005 by Kent Tessman
+	Copyright (c) 1995-2006 by Kent Tessman
 */
 
 
@@ -434,7 +434,7 @@ int GetVal()
 			*/
 			if ((incdec || preincdec) && MEM(codeptr)!=DECIMAL_T)
 			{
-				SaveUndo(VAR_T, i, val, 0, 0);
+				if (i < MAXGLOBALS) SaveUndo(VAR_T, i, val, 0, 0);
 
 				if (inctype) val = Increment(val, inctype);
 
