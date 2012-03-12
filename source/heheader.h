@@ -260,6 +260,12 @@ void arc_colour(unsigned char n, unsigned int c);
 
 #endif	/* Mac Glk */
 
+#if defined (GLK) && defined (__APPLE__)
+
+#define GetString HugoGetString
+#define FindWord HugoFindWord
+
+#endif  /* Mac OS X Glk */
 
 /*---------------------------------------------------------------------------
 	Definitions for the Glk port
@@ -270,6 +276,10 @@ void arc_colour(unsigned char n, unsigned int c);
 #if defined (GLK)
 
 #include "glk.h"
+
+#ifdef GARGLK
+#undef WIN32 /* Gargoyle is not WinGlk */
+#endif
 
 #define PORT_NAME "Glk"
 #define PORTER_NAME "Kent Tessman and Andrew Plotkin"
@@ -310,6 +320,8 @@ void heglk_printfatalerror(char *err);
 #ifndef isascii
 #define isascii(c)	(1)
 #endif
+#undef tolower
+#undef toupper
 #define tolower(c)      (glk_char_to_lower((unsigned char)c))
 #define toupper(c)      (glk_char_to_upper((unsigned char)c))
 

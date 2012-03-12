@@ -104,6 +104,13 @@ glkunix_startup_code (glkunix_startup_t *data)
       return FALSE;
     }
 
+#ifdef GARGLK
+    char *s;
+    s = strrchr(data->argv[1], '/');
+    if (!s) s = strrchr(data->argv[1], '\\');
+    garglk_set_story_name(s ? s + 1 : data->argv[1]);
+#endif
+
   glkunix_set_base_file(data->argv[1]);
   game = glkunix_stream_open_pathname (data->argv[1], 0, 0);
   if (game == NULL)

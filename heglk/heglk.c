@@ -3,7 +3,7 @@
 
 	Glk interface functions for the Hugo Engine
 
-	Copyright (c) 1999-2004 by Kent Tessman
+	Copyright (c) 1999-2006 by Kent Tessman
 */
 
 
@@ -456,6 +456,10 @@ void hugo_settextwindow(int left, int top, int right, int bottom)
 		/* ...either create a new window if none exists... */
 		if (!secondwin)
 		{
+			glk_stylehint_set (wintype_TextGrid, style_Normal, stylehint_ReverseColor, 1);
+			glk_stylehint_set (wintype_TextGrid, style_Subheader, stylehint_ReverseColor, 1);
+			glk_stylehint_set (wintype_TextGrid, style_Emphasized, stylehint_ReverseColor, 1);
+
 			winid_t p;
 
 			p = glk_window_get_parent(mainwin);
@@ -702,16 +706,13 @@ void hugo_font(int f)
 
 	glk_set_style(style_Normal);
 
-	if (f & BOLD_FONT && f & ITALIC_FONT)
-		glk_set_style(style_Alert);
-
-	else if (f & BOLD_FONT)
+	if (f & BOLD_FONT)
 		glk_set_style(style_Subheader);
 
-	else if (f & UNDERLINE_FONT)
+	if (f & UNDERLINE_FONT)
 		glk_set_style(style_Emphasized);
 
-	else if (f & ITALIC_FONT)
+	if (f & ITALIC_FONT)
 		glk_set_style(style_Emphasized);
 
 	if (f & PROP_FONT)
