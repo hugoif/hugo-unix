@@ -1233,6 +1233,9 @@ void hugo_init_screen(void)
          */
         initscr();
 #if defined DO_COLOR
+#ifdef NCURSES
+	use_default_colors();
+#endif
 	start_color();
 	if(has_colors())
 	{
