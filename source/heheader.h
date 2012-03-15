@@ -1027,6 +1027,7 @@ extern char pbuffer[];
 extern int currentpos;
 extern int currentline;
 extern int full;
+extern signed char def_fcolor, def_bgcolor, def_slfcolor, def_slbgcolor;
 extern signed char fcolor, bgcolor, icolor, default_bgcolor;
 extern int currentfont;
 extern char capital;

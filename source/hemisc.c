@@ -1506,11 +1506,52 @@ void LoadGame(void)
 
 #if !defined (GLK)	/* ParseCommandLine() is omitted for Glk */
 
+signed char def_fcolor    = DEF_FCOLOR;
+signed char def_bgcolor   = DEF_BGCOLOR;
+signed char def_slfcolor  = DEF_SLFCOLOR;
+signed char def_slbgcolor = DEF_SLBGCOLOR;
+
 void ParseCommandLine(int argc, char *argv[])
 {
 	char drive[MAXDRIVE], dir[MAXDIR], fname[MAXFILENAME], ext[MAXEXT];
+	char* game_file_arg;
+	int ch;
 
-	if (argc==1)
+#if defined(GCC_UNIX) && defined(DO_COLOR)
+	/* Parse comand line options (colour switches) */
+	while ((ch = getopt(argc, argv, "f:b:F:B:?h")) != -1) {
+	  switch (ch) {
+	    case 'f':
+	      def_fcolor = atoi(optarg);
+	      break;
+	    case 'b':
+	      def_bgcolor = atoi(optarg);
+	      break;
+	    case 'F':
+	      def_slfcolor = atoi(optarg);
+	      break;
+	    case 'B':
+	      def_slbgcolor = atoi(optarg);
+	      break;
+	    case 'h':
+	    case '?':
+	    default:
+	      Banner();
+	      if (mem) hugo_blockfree(mem);
+	      mem = NULL;
+	      exit(0);
+	  }
+	}
+	if ( optind < argc ) {
+	  game_file_arg = argv[optind];
+	}
+#else
+	if (argc>1) {
+	  game_file_arg = argv[1];
+	}
+#endif
+
+	if (game_file_arg==NULL)
 	{
 		Banner();
 		if (mem) hugo_blockfree(mem);
@@ -1518,10 +1559,10 @@ void ParseCommandLine(int argc, char *argv[])
 		exit(0);
 	}
 
-	hugo_splitpath(argv[1], drive, dir, fname, ext);
+	hugo_splitpath(game_file_arg, drive, dir, fname, ext);
 
 	if (strcmp(ext, ""))
-		strcpy(gamefile, argv[1]);
+		strcpy(gamefile, game_file_arg);
 	else
 		hugo_makepath(gamefile, drive, dir, fname,
 #if defined (DEBUGGER)

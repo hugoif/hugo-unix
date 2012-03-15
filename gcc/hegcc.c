@@ -1138,10 +1138,10 @@ int hugo_color(int c)
 	   colors:
 	*/
 
-        if (c==16)      c = DEF_FCOLOR;
-        else if (c==17) c = DEF_BGCOLOR;
-	else if (c==18) c = DEF_SLFCOLOR;
-	else if (c==19) c = DEF_SLBGCOLOR;
+        if (c==16)      c = def_fcolor;
+        else if (c==17) c = def_bgcolor;
+	else if (c==18) c = def_slfcolor;
+	else if (c==19) c = def_slbgcolor;
 	else if (c==20) c = hugo_color(fcolor);
  
 #if defined DO_COLOR
@@ -1268,8 +1268,8 @@ void hugo_cleanup_screen(void)
         /*
          * This will return the terminal to its original settings
          */
-	hugo_settextcolor(DEF_FCOLOR);
-	hugo_setbackcolor(DEF_BGCOLOR);
+	hugo_settextcolor(def_fcolor);
+	hugo_setbackcolor(def_bgcolor);
 	hugo_font(0);
 	hugo_clearfullscreen();
         endwin();
