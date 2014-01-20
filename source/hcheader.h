@@ -11,9 +11,9 @@
 #define HCVERSION 3
 #define HCREVISION 1
 #if !defined (COMPILE_V25)
-#define HCINTERIM ".03"
+#define HCINTERIM ".04"
 #else
-#define HCINTERIM ".03 (2.5)"
+#define HCINTERIM ".04 (2.5)"
 #endif
 
 
@@ -30,6 +30,7 @@
 #include "htokens.h"
 extern char *token[];
 
+#define strcpy hugo_strcpy
 
 /* DEBUG_FULLOBJ includes code for producing full object summaries. */
 #define DEBUG_FULLOBJ
