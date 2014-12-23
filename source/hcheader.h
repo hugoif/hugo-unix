@@ -29,7 +29,8 @@
 */
 #include "htokens.h"
 extern char *token[];
-
+extern char *hugo_strcpy(char *s, const char *t);
+#undef strcpy
 #define strcpy hugo_strcpy
 
 /* DEBUG_FULLOBJ includes code for producing full object summaries. */

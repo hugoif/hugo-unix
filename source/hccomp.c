@@ -317,6 +317,7 @@ SkiptoEndif:
 void CompilerMem(void)
 {
 	char e[64];
+        char buffer[256];
 
 	strcpy(e, "");
 

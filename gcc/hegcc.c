@@ -162,7 +162,13 @@ char *extension;
         }
         else strcpy(fname,file);
 
-        if (strcmp(dir, "") && fname[0]=='/') strcpy(fname, fname+1);
+        if (strcmp(dir, "") && fname[0]=='/') { 
+        int i = 0; 
+        while(1) { 
+          fname[i]=fname[++i]; 
+          if (fname[i] == '\0') break; 
+       } 
+   } 
 }
 
 void hugo_makepath(char *path, char *drive, char *dir, char *fname, char *ext)
