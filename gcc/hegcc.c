@@ -163,12 +163,12 @@ char *extension;
         else strcpy(fname,file);
 
         if (strcmp(dir, "") && fname[0]=='/') { 
-        int i = 0; 
-        while(1) { 
-          fname[i]=fname[++i]; 
-          if (fname[i] == '\0') break; 
-       } 
-   } 
+                int i = 0; 
+                do { 
+                        fname[i] = fname[i+1];
+                        ++i;
+                } while (fname[i] != '\0');
+        } 
 }
 
 void hugo_makepath(char *path, char *drive, char *dir, char *fname, char *ext)
