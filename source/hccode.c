@@ -987,7 +987,7 @@ void CodeLine(void)
 
 					for (j=0; j<(int)(compend-compstart); j++)
 					{
-						int resolve_data[15];
+						int resolve_data[15] = { 0 };
 
 						fseek(objectfile, compstart+j, SEEK_SET);
 						a = fgetc(objectfile);
