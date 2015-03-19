@@ -50,7 +50,7 @@ void BeginCodeBlock(void)
 
 void CodeDo(void)
 {
-	long loopptr, returnpos, tempptr, skipaddr;
+	long returnpos, tempptr, skipaddr;
 
 	Expect(2, "NULL", "new line following:  do");
 
@@ -62,7 +62,6 @@ void CodeDo(void)
 
 	Boundary();
 
-	loopptr = codeptr;
 	nest++;
 	full_buffer = 1;
 	BuildCode(DO_T);
@@ -405,7 +404,6 @@ void CodeLine(void)
 	/* i.e., if x = 1, 2, 3 */
 	long compstart = 0;             /* start of initial comparison	  */
 	long compend = 0;               /* where it ends		  */
-	char compbrackets = 0;          /* nested level of '=' or '~='	  */
 	int comptype = 0;		/* '=' or '~='			  */
 	char definite_ambiguity = 0, possible_ambiguity = 0;
 
@@ -982,8 +980,6 @@ void CodeLine(void)
 						WriteCode(AND_T, 1);
 					else
 						goto CommaError;
-
-					compbrackets = brackets;
 
 					for (j=0; j<(int)(compend-compstart); j++)
 					{

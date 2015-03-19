@@ -612,7 +612,7 @@ void PrintMenubar(void)
 
 char PrintMenuItem(char *a, int letters, int highlight)
 {
-	char printed_letter, short_key = 0, h;
+	char printed_letter, short_key = 0;
 	char letter[2];
 	int i;
 
@@ -623,7 +623,6 @@ char PrintMenuItem(char *a, int letters, int highlight)
 		printed_letter = false;
 		if (a[i]=='&')
 		{
-			h = 0;
 			if (letters)
 			{
 				debug_settextcolor(color[SELECT_TEXT]);

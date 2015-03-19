@@ -375,8 +375,6 @@ SkipPrintingWords:
 
 void FatalError(int n, char *a)
 {
-	int flag = 0;
-
 	if (percent && passnumber==1)
 	{
 		printf("\rCompiling %5d lines of %s", totallines, PRINTED_FILENAME(sourcefilename));
@@ -396,7 +394,6 @@ void FatalError(int n, char *a)
 		!strcmp(a, linkfilename) ||
 		(!strcmp(a, sourcefilename) && passnumber<=1))
 	{
-		flag = 1;
 	}
 	else
 		strcpy(a, "work file");

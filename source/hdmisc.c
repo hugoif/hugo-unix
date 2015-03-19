@@ -303,7 +303,7 @@ void DebugRunRoutine(long addr)
 {
 	int i;
 	char **temp_localname;
-	char temp_debugger_interrupt;
+	/* char temp_debugger_interrupt; */
 	char temp_debugger_step_over;
 	int temp_current_locals, temp_dbnest;
 	struct window_structure temp_locals_window;
@@ -324,7 +324,7 @@ void DebugRunRoutine(long addr)
 	window[VIEW_LOCALS].selected = 0;
 
 	temp_debugger_step_over = debugger_step_over;
-	temp_debugger_interrupt = debugger_interrupt;
+	/* temp_debugger_interrupt = debugger_interrupt; */
 	debug_call_stack++;
 
 	temp_dbnest = dbnest;

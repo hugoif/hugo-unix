@@ -146,7 +146,9 @@ void AP (char *a)
 	char sticky = false, skipspchar = false, startofline = 0;
 	int i, alen, plen, cwidth;
 	char c = 0;			/* current character */
+#ifdef USE_SMARTFORMATTING
 	char lastc = 0;			/* for smart formatting */
+#endif
 
 	static int lastfcolor = 16, lastbgcolor = 17;
 	static int lastfont = NORMAL_FONT;
@@ -411,13 +413,13 @@ AddFontCode:
 			thisline = 0;
 #ifdef USE_SMARTFORMATTING
 			leftquote = true;
+			lastc = '\n';
 #endif
 			pbuffer[plen++] = COLOR_CHANGE;
 			pbuffer[plen++] = (char)(fcolor+1);
 			pbuffer[plen++] = (char)(bgcolor+1);
 			pbuffer[plen] = '\0';
 
-			lastc = '\n';
 
 			continue;
 		}

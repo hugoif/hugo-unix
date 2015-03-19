@@ -341,7 +341,6 @@ void PropertyAlreadyDefined(int i)
 void BuildObject(int from)
 {
 	char objtype[8];
-        int notflag;
 	int i, j;
 	int objstack[16],
 		objstackcount = 0;	/* for multiple-object inheritance */
@@ -532,7 +531,6 @@ void BuildObject(int from)
 
 				if (word[i][0]=='}') goto LeaveBuildObject;
 
-				notflag = false;
 				if (!strcmp(word[i], "not"))
 				{
 					isnot = 1;
@@ -540,7 +538,6 @@ void BuildObject(int from)
 						tempattr[j] = attr[j],
 						attr[j] = notattr[j];
 					i++;
-					notflag = true;
 				}
 
 				flag = 0;
