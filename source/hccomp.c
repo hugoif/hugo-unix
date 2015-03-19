@@ -347,10 +347,12 @@ void CompilerMem(void)
 		if (objectctr) strcpy(e, "Object(s)");
 		else
 		{
+			int i;
 			free(object);
 			free(object_hash);
 			free(oprop);
-			free(objattr);
+			for (i=0; i<MAXATTRIBUTES/32; i++)
+				free(objattr[i]);
 			free(objpropaddr);
 			free(parent);
 			free(sibling);
