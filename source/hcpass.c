@@ -838,6 +838,7 @@ void Pass3(void)
 			WriteCode(tbuf[i], 1);
 		if (j < tcount) break;
 	}
+	free(tbuf);
 	if (ferror(textfile)) FatalError(READ_E, "text file");
 
 
