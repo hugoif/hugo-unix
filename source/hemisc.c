@@ -1342,7 +1342,7 @@ void LoadGame(void)
 #if defined (DEBUGGER_PRINTFATALERROR)
 		DEBUGGER_PRINTFATALERROR(line);
 #else
-		printf(line);
+		printf("%s", line);
 #endif
 		hugo_closefiles();
 		hugo_blockfree(mem);
@@ -1361,7 +1361,7 @@ void LoadGame(void)
 #if defined (DEBUGGER_PRINTFATALERROR)
 		DEBUGGER_PRINTFATALERROR(line);
 #else
-		printf(line);
+		printf("%s", line);
 #endif
 		hugo_closefiles();
 		hugo_blockfree(mem);
