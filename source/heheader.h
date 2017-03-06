@@ -1,20 +1,20 @@
 /*
-	HEHEADER.H
+	heheader.h
 
 	contains definitions and prototypes
 	for the Hugo Engine
-
-	Copyright (c) 1995-2006 by Kent Tessman
 */
 
 
 #define HEVERSION 3
-#define HEREVISION 1
+#define HEREVISION 2
 #if !defined (COMPILE_V25)
-#define HEINTERIM ".03"
+#define HEINTERIM ".00"
 #else
-#define HEINTERIM ".03 (2.5)"
+#define HEINTERIM ".00 (2.5)"
 #endif
+
+#define HEVERSION_COMPATIBLE 31
 
 #include <string.h>
 
@@ -663,7 +663,7 @@ extern void srandom(int);
 #endif
 
 #if !defined (PRINTFATALERROR)
-#define PRINTFATALERROR(a)	fprintf(stderr, a)
+#define PRINTFATALERROR(a)	fprintf(stderr, "%s", a)
 #endif
 
 #ifndef OMIT_EXTRA_STRING_FUNCTIONS

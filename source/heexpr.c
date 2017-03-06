@@ -1,5 +1,5 @@
 /*
-	HEEXPR.C
+	heexpr.c
 
 	Expression/value management functions:
 
@@ -13,8 +13,6 @@
 		TrimExpr
 
 	for the Hugo Engine
-
-	Copyright (c) 1995-2006 by Kent Tessman
 */
 
 
@@ -45,7 +43,7 @@ char inobj = 0;                         /* true when in object compound    */
 int last_precedence;
 
 
-/* EVALEXPR
+/* EvalExpr
 
 	The new-and-improved expression evaluator.  Evaluates the current
 	expression (or sub-expression therein) beginning at eval[p].
@@ -281,7 +279,7 @@ ReturnResult:
 }
 
 
-/* GETVAL
+/* GetVal
 
 	Called by GetValue(); does the actual dirty work of returning
 	a value from a simple data type.
@@ -740,7 +738,7 @@ int GetVal()
 }
 
 
-/* GETVALUE
+/* GetValue
 
 	Does any reckoning for more sophisticated constructions.
 */
@@ -938,7 +936,7 @@ CheckAttribute:
 }
 
 
-/* INCREMENT
+/* Increment
 
 	Actually performs the increment given below by IsIncrement.
 */
@@ -977,7 +975,7 @@ int Increment(int a, char inctype)
 }
 
 
-/* ISINCREMENT
+/* IsIncrement
 
 	If an increment/decrement is next up (i.e. ++, --, or +=, *=, etc.),
 	then sets incdec equal to the increment/decrement and repositions
@@ -1032,7 +1030,7 @@ char IsIncrement(long addr)
 }
 
 
-/* PRECEDENCE
+/* Precedence
 
 	Returns the precedence ranking of the operator represented by
 	token[t].  The lower the return value, the higher the rank in
@@ -1073,7 +1071,7 @@ int Precedence(int t)
 }
 
 
-/* PRINTEXPR
+/* PrintExpr
 
 	Prints the current expression during expression tracing.
 */
@@ -1122,7 +1120,7 @@ ExitPrintExpr:
 #endif
 
 
-/* SETUPEXPR
+/* SetupExpr
 
 	Reads the current expression from the current code position
 	into eval[], using the following key:
@@ -1310,7 +1308,7 @@ SomeSymbolorToken:
 }
 
 
-/* TRIMEXPR
+/* TrimExpr
 
 	Cuts off straggling components of eval[] after an expression or
 	sub-expression has been successfully evaluated.

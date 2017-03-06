@@ -1,5 +1,5 @@
 /*
-	HEOBJECT.C
+	heobject.c
 
 	Object/property/attribute management functions:
 
@@ -15,8 +15,6 @@
 		PropAddr
 
 	for the Hugo Engine
-
-	Copyright (c) 1995-2006 by Kent Tessman
 */
 
 
@@ -31,7 +29,7 @@ char display_needs_repaint = 0;		/* for display object       */
 int display_pointer_x = 0, display_pointer_y = 0;
 
 
-/* CHECKOBJECTRANGE
+/* CheckObjectRange
 
 	Shorthand since many of these object functions may call
 	CheckinRange() if the debugger is running and runtime_warnings
@@ -50,7 +48,7 @@ int CheckObjectRange(int obj)
 #endif
 
 
-/* CHILD */
+/* Child */
 
 int Child(int obj)
 {
@@ -71,7 +69,7 @@ int Child(int obj)
 }
 
 
-/* CHILDREN */
+/* Children */
 
 int Children(int obj)
 {
@@ -88,7 +86,7 @@ int Children(int obj)
 }
 
 
-/* ELDER */
+/* Elder */
 
 int Elder(int obj)
 {
@@ -111,7 +109,7 @@ int Elder(int obj)
 }
 
 
-/* GETATTRIBUTES
+/* GetAttributes
 
 	Returns one of four sets of 32 attributes.
 */
@@ -136,7 +134,7 @@ unsigned long GetAttributes(int obj, int attribute_set)
 }
 
 
-/* GETPROP
+/* GetProp
 
 	Returns the value of '<obj>.<p> #<n>'  If <s> is true, the self global
 	is not set to <obj> in order to facilitate <obj>..<p> calls.
@@ -478,7 +476,7 @@ NoMorePropMatches:
 }
 
 
-/* GRANDPARENT
+/* GrandParent
 
 	Returns the value of the last object above <obj> in the tree
 	before object 0.
@@ -502,7 +500,7 @@ int GrandParent(int obj)
 }
 
 
-/* MOVEOBJ */
+/* MoveObj */
 
 void MoveObj(int obj, int p)
 {
@@ -557,7 +555,7 @@ void MoveObj(int obj, int p)
 }
 
 
-/* NAME */
+/* Name */
 
 char *Name(int obj)
 {
@@ -572,7 +570,7 @@ char *Name(int obj)
 }
 
 
-/* PARENT */
+/* Parent */
 
 int Parent(int obj)
 {
@@ -593,7 +591,7 @@ int Parent(int obj)
 }
 
 
-/* PROPADDR
+/* PropAddr
 
 	Returns address of <obj>.<p> (with <offset> provided for additive
 	properties--i.e. subsequent calls with the same <obj> and <p>.
@@ -649,7 +647,7 @@ unsigned int PropAddr(int obj, int p, unsigned int offset)
 }
 
 
-/* PUTATTRIBUTES
+/* PutAttributes
 
 	Writes (puts) one of four sets of 32 attributes.
 */
@@ -670,7 +668,7 @@ void PutAttributes(int obj, unsigned long a, int attribute_set)
 }
 
 
-/* SETATTRIBUTE */
+/* SetAttribute */
 
 void SetAttribute(int obj, int attr, int c)  /* c = 1 for set, 0 for clear */
 {
@@ -697,7 +695,7 @@ void SetAttribute(int obj, int attr, int c)  /* c = 1 for set, 0 for clear */
 }
 
 
-/* SIBLING */
+/* Sibling */
 
 int Sibling(int obj)
 {
@@ -718,7 +716,7 @@ int Sibling(int obj)
 }
 
 
-/* TESTATTRIBUTE */
+/* TestAttribute */
 
 int TestAttribute(int obj, int attr, int nattr)
 {
@@ -742,7 +740,7 @@ int TestAttribute(int obj, int attr, int nattr)
 }
 
 
-/* YOUNGEST */
+/* Youngest */
 
 int Youngest(int obj)
 {

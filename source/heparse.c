@@ -1,5 +1,5 @@
 /*
-	HEPARSE.C
+	heparse.c
 
 	Input parsing functions:
 
@@ -28,8 +28,6 @@
 		SeparateWords
 
 	for the Hugo Engine
-
-	Copyright (c) 1995-2006 by Kent Tessman
 */
 
 
@@ -105,7 +103,7 @@ static char recursive_call = false;     /* to MatchObject() */
 int parse_location;	/* usually var[location] */
 
 
-/* ADDALLOBJECTS
+/* AddAllObjects
 */
 
 void AddAllObjects(int loc)
@@ -131,7 +129,7 @@ void AddAllObjects(int loc)
 }
 
 
-/* ADDOBJ
+/* AddObj
 
 	Adds the object <obj> to objlist[], making all related adjustments.
 */
@@ -151,7 +149,7 @@ void AddObj(int obj)
 }
 
 
-/* ADDPOSSIBLEOBJECT
+/* AddPossibleObject
 
 	Adds <obj> as a contender to the possible object list, noting that
 	it was referred to as either a noun or an adjective.
@@ -199,7 +197,7 @@ void AddPossibleObject(int obj, char type, unsigned int w)
 }
 
 
-/* ADVANCEGRAMMAR
+/* AdvanceGrammar
 
 	Move the address in the grammar table past the current token.
 */
@@ -246,7 +244,7 @@ void AdvanceGrammar(void)
 }
 
 
-/* ANYOBJWORD
+/* AnyObjWord
 
 	For when it's only necessary to know if word[wn] is an object word for
 	any object, not a particular object.  Returns 1 for an object word or -1
@@ -272,7 +270,7 @@ int AnyObjWord(int wn)
 }
 
 
-/* AVAILABLE
+/* Available
 
 	The non_grammar argument is true when called from a non-
 	grammar function such as RunEvents().
@@ -329,7 +327,7 @@ int Available(int obj, char non_grammar)
 }
 
 
-/* CALLLIBRARYPARSE */
+/* CallLibraryParse */
 
 void CallLibraryParse(void)
 {
@@ -369,7 +367,7 @@ void CallLibraryParse(void)
 }
 
 
-/* DOMAINOBJ
+/* DomainObj
 
 	Takes into account the preset domain for checking an object's
 	presence; <domain> is 0, -1, or an object number..
@@ -416,7 +414,7 @@ int DomainObj(int obj)
 }
 
 
-/* FINDWORD
+/* FindWord
 
 	Returns the dictionary address of <a>.
 */
@@ -485,7 +483,7 @@ unsigned int FindWord(char *a)
 }
 
 
-/* INLIST
+/* InList
 
 	Checks to see if <obj> is in objlist[].
 */
@@ -503,7 +501,7 @@ int InList(int obj)
 }
 
 
-/* KILLWORD
+/* KillWord
 
 	Deletes word[a].
 */
@@ -524,7 +522,7 @@ void KillWord(int a)
 }
 
 
-/* MATCHCOMMAND
+/* MatchCommand
 
 	Here, briefly, is how MatchCommand() works:
 
@@ -995,7 +993,7 @@ NextStructure:
 }
 
 
-/* MATCHOBJECT
+/* MatchObject
 
 	The argument is the word number we're starting matching on.
 
@@ -1804,7 +1802,7 @@ RestoreTempArrays:
 }
 
 
-/* MATCHWORD */
+/* MatchWord */
 
 int MatchWord(int *wordnum)
 {
@@ -2122,7 +2120,7 @@ CheckXobjectFinish:
 }
 
 
-/* OBJWORDTYPE
+/* ObjWordType
 
 	Returns true if the specified object has the specified word
 	as an adjective or noun (as specified by type).
@@ -2166,7 +2164,7 @@ int ObjWordType(int obj, unsigned int w, int type)
 }
 
 
-/* OBJWORD
+/* ObjWord
 
 	Returns <adjective> if the word at dictionary address <w> is
 	an adjective of <obj>, or <noun> if it is a noun.
@@ -2187,7 +2185,7 @@ int ObjWord(int obj, unsigned int w)
 }
 
 
-/* PARSE
+/* Parse
 
 	Turns word[] into dictionary addresses stored in wd[].  Takes care
 	of fingering illegal (unknown) words and doing alterations such
@@ -2370,7 +2368,7 @@ NextSyn:
 }
 
 
-/* PARSEERROR */
+/* ParseError */
 
 void ParseError(int e, int a)
 {
@@ -2524,7 +2522,7 @@ void ParseError(int e, int a)
 }
 
 
-/* REMOVEWORD
+/* RemoveWord
 
 	Deletes wd[a].
 */
@@ -2544,7 +2542,7 @@ void RemoveWord(int a)
 }
 
 
-/* RESETFINDOBJECT
+/* ResetFindObject
 
 	Call FindObject(0, 0) to reset library's disambiguation
 	mechanism.
@@ -2566,7 +2564,7 @@ void ResetFindObject(void)
 }
 
 
-/* SEPARATEWORDS
+/* SeparateWords
 
 	Splits <buffer> into the word[] array.  Also does nifty things
 	such as turning time values such as hh:mm into a single number
@@ -2691,7 +2689,7 @@ void SeparateWords(void)
 }
 
 
-/* SUBTRACTOBJ
+/* SubtractObj
 
 	Removes object <obj> from objlist[], making all related adjustments.
 */
@@ -2713,7 +2711,7 @@ void SubtractObj(int obj)
 }
 
 
-/* SUBTRACTPOSSIBLEOBJECT
+/* SubtractPossibleObject
 
 	Removes <obj> as a possible contender for object disambiguation.
 */
@@ -2748,7 +2746,7 @@ void SubtractPossibleObject(int obj)
 }
 
 
-/* TRYOBJ
+/* TryObj
 
 	Called by MatchObject() to see if <obj> is available, and add it to
 	or subtract it from objlist[] accordingly.
@@ -2780,7 +2778,7 @@ void TryObj(int obj)
 }
 
 
-/* VALIDOBJ
+/* ValidObj
 
 	Checks first of all to see if an object is available, then checks
 	if it meets all the qualifications demanded by the grammar syntax.

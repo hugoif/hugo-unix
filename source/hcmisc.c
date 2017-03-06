@@ -18,7 +18,7 @@
 
 	for the Hugo Compiler
 
-	Copyright (c) 1995-2006 by Kent Tessman
+	Copyright (c) 1995-2009 by Kent Tessman
 */
 
 
@@ -571,15 +571,15 @@ void ParseCommand(int argc, char *argv[])
 
 	if (argc==1)
 	{
-		sprintf(line, "\nSYNTAX:   %s [options] sourcefile [objectfile[.HEX]]", argv[0]); //, PROGRAM_NAME);
+		sprintf(line, "\Syntax:   %s [options] sourcefile [objectfile[.hex]]", argv[0]); //, PROGRAM_NAME);
 		Printout(line);
-		Printout("OPTIONS:  -<switches>  $<limit setting>  #<compiler flag>  @<directory>");
-		Printout("\nSWITCHES:");
-		Printout("  -a  Abort on first error                -d  build .HDX Debuggable executable");
+		Printout("Options:  -<switches>  $<limit setting>  #<compiler flag>  @<directory>");
+		Printout("\Switches:");
+		Printout("  -a  Abort on first error                -d  build .hdx Debuggable executable");
 #if defined (DEBUG_FULLOBJ)
 		Printout("  -f  Full object summaries               \\;");
 #endif
-		Printout("-h  generate .HLB precompiled Header");
+		Printout("-h  generate .hlb precompiled Header");
 #if !defined (LITTLE_VERSION)
 		Printout("  -i  print debugging Information         \\;");
 #endif
@@ -590,7 +590,7 @@ void ParseCommand(int argc, char *argv[])
 #else
 		Printout("");
 #endif
-		Printout("  -s  display compilation Statistics      -t  Text to .LST for spellchecking");
+		Printout("  -s  display compilation Statistics      -t  Text to .lst for spellchecking");
 		Printout("  -u  show memory Usage for objectfile    -v  Verbose compilation");
 		Printout("  -w  Write objectfile despite errors     -x  override switches in source code");
 /*
@@ -598,8 +598,8 @@ void ParseCommand(int argc, char *argv[])
 		Printout("  -25 compile with v2.5 compatibility");
 #endif
 */
-		Printout("\nLIMIT SETTINGS:  $<setting>=<new limit> (or $list to view)");
-		Printout("DIRECTORIES:     @<directory name>=<actual directory> (or @list to view)");
+		Printout("\Limit settings:  $<setting>=<new limit> (or $list to view)");
+		Printout("Directories:     @<directory name>=<actual directory> (or @list to view)");
 		exit(0);
 	}
 

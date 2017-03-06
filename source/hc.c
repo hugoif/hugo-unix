@@ -1,7 +1,7 @@
 /*
 	-------------------------------------------
-	HUGO COMPILER by Kent Tessman
-	Copyright (c) 1995-2006
+	Hugo Compiler by Kent Tessman
+	Copyright (c) 1995-2010
 
 	The General Coffee Company Film Productions
 	-------------------------------------------
@@ -31,7 +31,7 @@ time_t tick;                    /* to time compilation */
 int exitvalue = 0;
 
 
-/* MAIN
+/* main
 
 	If FRONT_END is defined, the external main() function can pass the
 	calling parameters argc and argv to hc_main.
@@ -82,7 +82,7 @@ int hc_main(int argc, char *argv[])
 
 void Banner(FILE *stream, char *name)
 {
-	fprintf(stream, "HUGO COMPILER v%d.%d%s by Kent Tessman (c) 1995-2006\n", HCVERSION, HCREVISION, HCINTERIM);
+	fprintf(stream, "Hugo Compiler v%d.%d%s by Kent Tessman (c) 1995-2009\n", HCVERSION, HCREVISION, HCINTERIM);
 	fprintf(stream, "The General Coffee Company Film Productions\n");
 #if defined (PORT_NAME)
 	fprintf(stream, "%s port by %s\n", PORT_NAME, PORTER_NAME);

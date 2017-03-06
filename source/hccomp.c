@@ -4,7 +4,7 @@
 	contains Compiler directive routines
 	for the Hugo Compiler
 
-	Copyright (c) 1995-2006 by Kent Tessman
+	Copyright (c) 1995-2009 by Kent Tessman
 */
 
 
@@ -114,7 +114,7 @@ void CompilerDirective(void)
 		if (percent)
 			{sprintf(line, "\rCompiling       lines of %s", sourcefilename);
 			strnset(line+26, ' ', strlen(sourcefilename));
-			printf(line);}
+			printf("%s", line);}
 
 		strcpy(sourcefilename, word[2]);
 		if (!(sourcefile = TrytoOpen(sourcefilename, "rb", "source")))

@@ -1,5 +1,5 @@
 /*
-	HEMISC.C
+	hemisc.c
 
 	Miscellaneous functions:
 
@@ -19,8 +19,6 @@
 		LoadGame		Undo
 
 	for the Hugo Engine
-
-	Copyright (c) 1995-2006 by Kent Tessman
 */
 
 
@@ -565,7 +563,7 @@ AddFontCode:
 }
 
 
-/* CALLROUTINE
+/* CallRoutine
 
 	Used whenever a routine is called, assumes the routine address
 	and begins with the arguments (if any).
@@ -659,7 +657,7 @@ int CallRoutine(unsigned int addr)
 }
 
 
-/* CONTEXTCOMMAND
+/* ContextCommand
 
 	Adds a command to the context command list.  A zero value
 	(i.e., an empty string) resets the list.
@@ -695,7 +693,7 @@ ContextCommandLoop:
 }
 
 
-/* DICT
+/* Dict
 
 	Dynamically creates a new dictionary entry.
 */
@@ -770,7 +768,7 @@ unsigned int Dict()
 }
 
 
-/* FATALERROR */
+/* FatalError */
 
 void FatalError(int n)
 {
@@ -881,7 +879,7 @@ if (n==UNKNOWN_OP_E || n==ILLEGAL_OP_E || n==EXPECT_VAL_E || n==OVERFLOW_E)
 }
 
 
-/* FILEIO */
+/* FileIO */
 
 void FileIO(void)
 {
@@ -989,7 +987,7 @@ LeaveFileIO:
 }
 
 
-/* FLUSHPBUFFER */
+/* Flushpbuffer */
 
 void Flushpbuffer()
 {
@@ -1017,7 +1015,7 @@ void Flushpbuffer()
 }
 
 
-/* GETCOMMAND */
+/* GetCommand */
 
 void GetCommand(void)
 {
@@ -1081,7 +1079,7 @@ void GetCommand(void)
 }
 
 
-/* GETSTRING
+/* GetString
 
 	From any address <addr>; the segment must be defined prior to
 	calling the function.
@@ -1102,7 +1100,7 @@ char *GetString(long addr)
 }
 
 
-/* GETTEXT
+/* GetText
 
 	Get text block from position <textaddr> in the text bank.  If
 	the game was not fully loaded in memory, i.e., if loaded_in_memory
@@ -1149,7 +1147,7 @@ char *GetText(long textaddr)
 }
 
 
-/* GETWORD
+/* GetWord
 
 	From the dictionary table.
 */
@@ -1181,7 +1179,7 @@ char *GetWord(unsigned int w)
 }
 
 
-/* HANDLETAILRECURSION */
+/* HandleTailRecursion */
 
 void HandleTailRecursion(long addr)
 {
@@ -1221,7 +1219,7 @@ void HandleTailRecursion(long addr)
 }
 
 
-/* INITGAME */
+/* InitGame */
 
 void InitGame(void)
 {
@@ -1272,7 +1270,7 @@ void InitGame(void)
 }
 
 
-/* LOADGAME */
+/* LoadGame */
 
 void LoadGame(void)
 {
@@ -1340,7 +1338,7 @@ void LoadGame(void)
 #if defined (DEBUGGER_PRINTFATALERROR)
 		DEBUGGER_PRINTFATALERROR(line);
 #else
-		printf(line);
+		printf("%s", line);
 #endif
 		hugo_closefiles();
 		hugo_blockfree(mem);
@@ -1359,7 +1357,7 @@ void LoadGame(void)
 #if defined (DEBUGGER_PRINTFATALERROR)
 		DEBUGGER_PRINTFATALERROR(line);
 #else
-		printf(line);
+		printf("%s", line);
 #endif
 		hugo_closefiles();
 		hugo_blockfree(mem);
@@ -1502,7 +1500,7 @@ void LoadGame(void)
 }
 
 
-/* PARSECOMMANDLINE */
+/* ParseCommandLine */
 
 #if !defined (GLK)	/* ParseCommandLine() is omitted for Glk */
 
@@ -1548,7 +1546,7 @@ void ParseCommandLine(int argc, char *argv[])
 #endif	/* GLK */
 
 
-/* PASSLOCALS
+/* PassLocals
 
 	Must be called before running every new routine, i.e. before
 	calling RunRoutine().  Unfortunately, the current locals must
@@ -1571,7 +1569,7 @@ void PassLocals(int n)
 
 #ifdef NO_INLINE_MEM_FUNCTIONS
 
-/* PEEK */
+/* Peek */
 
 unsigned char Peek(long a)
 {
@@ -1579,7 +1577,7 @@ unsigned char Peek(long a)
 }
 
 
-/* PEEKWORD */
+/* PeekWord */
 
 unsigned int PeekWord(long a)
 {
@@ -1587,7 +1585,7 @@ unsigned int PeekWord(long a)
 }
 
 
-/* POKE */
+/* Poke */
 
 void Poke(unsigned int a, unsigned char v)
 {
@@ -1595,7 +1593,7 @@ void Poke(unsigned int a, unsigned char v)
 }
 
 
-/* POKEWORD */
+/* PokeWord */
 
 void PokeWord(unsigned int a, unsigned int v)
 {
@@ -1606,7 +1604,7 @@ void PokeWord(unsigned int a, unsigned int v)
 #endif	/* NO_INLINED_MEM_FUNCTIONS */
 
 
-/* PRINTHEX
+/* PrintHex
 
 	Returns <a> as a hex-number string in XXXXXX format.
 */
@@ -1632,7 +1630,7 @@ char *PrintHex(long a)
 }
 
 
-/* PRINTOUT
+/* Printout
 
 	Print to client display taking into account cursor relocation, 
 	font changes, color setting, and window scrolling.
@@ -1846,7 +1844,7 @@ void Printout(char *a)
 }
 
 
-/* PROMPTMORE */
+/* PromptMore */
 
 #ifndef PROMPTMORE_REPLACED
 
@@ -1966,7 +1964,7 @@ void PromptMore(void)
 #endif	/* ifndef PROMPTMORE_REPLACED */
 
 
-/* RECORDCOMMANDS */
+/* RecordCommands */
 
 int RecordCommands(void)
 {
@@ -2051,7 +2049,7 @@ int RecordCommands(void)
 }
 
 
-/* SAVEUNDO
+/* SaveUndo
 
 	Formats:
 
@@ -2095,7 +2093,7 @@ void SaveUndo(int a, int b, int c, int d, int e)
 }
 
 
-/* SETSTACKFRAME
+/* SetStackFrame
 
         Properly sets up the code_block structure for the current stack
         depth depending on if this is a called block (RUNROUTINE_BLOCK)
@@ -2117,7 +2115,7 @@ void SetStackFrame(int depth, int type, long brk, long returnaddr)
 }
 
 
-/* SETUPDISPLAY */
+/* SetupDisplay */
 
 void SetupDisplay(void)
 {
@@ -2137,7 +2135,7 @@ void SetupDisplay(void)
 }
 
 
-/* SPECIALCHAR
+/* SpecialChar
 
 	SpecialChar() is passed <a> as the string and <*i> as the
 	position in the string.  The character(s) at a[*i], a[*(i+1)],
@@ -2382,7 +2380,7 @@ char SpecialChar(char *a, int *i)
 }
 
 
-/* TRYTOOPEN
+/* TrytoOpen
 
 	Tries to open a particular filename (based on a given environment
 	variable), trying the current directory first.
@@ -2438,7 +2436,7 @@ HUGO_FILE TrytoOpen(char *f, char *p, char *d)
 #endif	/* GLK */
 
 
-/* UNDO */
+/* Undo */
 
 int Undo()
 {

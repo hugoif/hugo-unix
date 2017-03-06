@@ -1,9 +1,7 @@
 /*
-	HEBUFFER.C
+	hebuffer.c
 
 	Text-buffer management for the Hugo Engine
-
-	Copyright (c) 2002-2006 by Kent Tessman
 
 To use text-buffer management:
 

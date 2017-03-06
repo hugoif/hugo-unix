@@ -1,7 +1,7 @@
 /*
 	-------------------------------------------
-	HUGO ENGINE by Kent Tessman
-	Copyright (c) 1995-2006
+	Hugo Engine by Kent Tessman
+	Copyright (c) 1995-2010
 
 	The General Coffee Company Film Productions
 	-------------------------------------------
@@ -62,7 +62,7 @@ char program_path[MAXPATH] = "";
 void MakeProgramPath(char *path);
 
 
-/* MAIN
+/* main
 
 	If FRONT_END is defined, the external main() function can pass the
    	calling parameters argc and argv to he_main.
@@ -124,11 +124,11 @@ int he_main(int argc, char *argv[])
 
 void Banner(void)
 {
-	printf("HUGO %s v%d.%d%s by Kent Tessman (c) 1995-2006\n",
+	printf("Hugo %s v%d.%d%s by Kent Tessman (c) 1995-2009\n",
 #if defined (DEBUGGER)
-	"DEBUGGER",
+	"Debugger",
 #else
-	"ENGINE",
+	"Engine",
 #endif
 	HEVERSION, HEREVISION, HEINTERIM);
 
@@ -138,9 +138,9 @@ void Banner(void)
 #endif
 	printf("SYNTAX:  %s filename[%s]\n", my_argv?my_argv[0]:PROGRAM_NAME,
 #if defined (DEBUGGER)
-	".HDX");
+	".hdx");
 #else
-	".HEX");
+	".hex");
 #endif
 }
 

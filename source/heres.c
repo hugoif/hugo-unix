@@ -13,7 +13,7 @@
 
 	for the Hugo Engine
 
-	Copyright (c) 1995-2006 by Kent Tessman
+	Copyright (c) 1995-2009 by Kent Tessman
 
 	NOTE:  The normal course of action for loading any resource is
 	first to try and find it in the specified resourcefile.  If that
@@ -135,44 +135,52 @@ void PlayMusic(void)
 
 	/* Check for MIDI */
 	fseek(resource_file, resstart, SEEK_SET);
-	fread(resname, 4, 1, resource_file);
-	if (!memcmp(resname, "MThd", 4))
+	if (fread(resname, 4, 1, resource_file) > 0)
 	{
-		resource_type = MIDI_R;
-		goto Identified;
+		if (!memcmp(resname, "MThd", 4))
+		{
+			resource_type = MIDI_R;
+			goto Identified;
+		}
 	}
 
 	/* Check for XM */
 	fseek(resource_file, resstart, SEEK_SET);
-	fread(resname, 17, 1, resource_file);
-	if (!memcmp(resname, "Extended Module: ", 17))
+	if (fread(resname, 17, 1, resource_file) > 0)
 	{
-		resource_type = XM_R;
-		goto Identified;
+		if (!memcmp(resname, "Extended Module: ", 17))
+		{
+			resource_type = XM_R;
+			goto Identified;
+		}
 	}
 
 	/* Check for S3M */
 	fseek(resource_file, resstart+0x2c, SEEK_SET);
-	fread(resname, 4, 1, resource_file);
-	if (!memcmp(resname, "SCRM", 4))
+	if (fread(resname, 4, 1, resource_file) > 0)
 	{
-		resource_type = S3M_R;
-		goto Identified;
+		if (!memcmp(resname, "SCRM", 4))
+		{
+			resource_type = S3M_R;
+			goto Identified;
+		}
 	}
 
 	/* Check for MOD */
 	fseek(resource_file, resstart+1080, SEEK_SET);
-	fread(resname, 4, 1, resource_file);
-	resname[4] = '\0';
-	/* There are a whole bunch of different MOD identifiers: */
-	if (!strcmp(resname+1, "CHN") ||	/* 4CHN, 6CHN, 8CHN */
-	    !strcmp(resname+2, "CN") ||		/* 16CN, 32CN */
-	    !strcmp(resname, "M.K.") || !strcmp(resname, "M!K!") ||
-	    !strcmp(resname, "FLT4") || !strcmp(resname, "CD81") ||
-	    !strcmp(resname, "OKTA") || !strcmp(resname, "    "))
+	if (fread(resname, 4, 1, resource_file) > 0)
 	{
-		resource_type = MOD_R;
-		goto Identified;
+		resname[4] = '\0';
+		/* There are a whole bunch of different MOD identifiers: */
+		if (!strcmp(resname+1, "CHN") ||	/* 4CHN, 6CHN, 8CHN */
+		    !strcmp(resname+2, "CN") ||		/* 16CN, 32CN */
+		    !strcmp(resname, "M.K.") || !strcmp(resname, "M!K!") ||
+		    !strcmp(resname, "FLT4") || !strcmp(resname, "CD81") ||
+		    !strcmp(resname, "OKTA") || !strcmp(resname, "    "))
+		{
+			resource_type = MOD_R;
+			goto Identified;
+		}
 	}
 
 	/* Check for MP3 */
@@ -222,16 +230,18 @@ void PlaySample(void)
 		return;
 
 	/* Find out what kind of audio sample this is */
-	fread(resname, 4, 1, resource_file);
-	if (!memcmp(resname, "WAVE", 4))
-		resource_type = WAVE_R;
-	else
-		resource_type = UNKNOWN_R;
+	if (fread(resname, 4, 1, resource_file) > 0)
+	{
+		if (!memcmp(resname, "WAVE", 4))
+			resource_type = WAVE_R;
+		else
+			resource_type = UNKNOWN_R;
 
-	fseek(resource_file, -4, SEEK_CUR);
+		fseek(resource_file, -4, SEEK_CUR);
 
-	if (!hugo_playsample(resource_file, reslength, loop_flag))
-		var[system_status] = STAT_LOADERROR;
+		if (!hugo_playsample(resource_file, reslength, loop_flag))
+			var[system_status] = STAT_LOADERROR;
+	}
 }
 
 
@@ -279,20 +289,24 @@ void PlayVideo(void)
 
 	/* Check for MPEG */
 	fseek(resource_file, resstart, SEEK_SET);
-	fread(resname, 4, 1, resource_file);
-	if (resname[2]==0x01 && (unsigned char)resname[3]==0xba)
+	if (fread(resname, 4, 1, resource_file) > 0)
 	{
-		resource_type = MPEG_R;
-		goto Identified;
+		if (resname[2]==0x01 && (unsigned char)resname[3]==0xba)
+		{
+			resource_type = MPEG_R;
+			goto Identified;
+		}
 	}
 
 	/* Check for AVI */
 	fseek(resource_file, resstart+8, SEEK_SET);
-	fread(resname, 4, 1, resource_file);
-	if (!memcmp(resname, "AVI ", 4))
+	if (fread(resname, 4, 1, resource_file) > 0)
 	{
-		resource_type = AVI_R;
-		goto Identified;
+		if (!memcmp(resname, "AVI ", 4))
+		{
+			resource_type = AVI_R;
+			goto Identified;
+		}
 	}
 
 	/* No file type identified */

@@ -1,20 +1,20 @@
 /*
-	HCHEADER.H
+	hcheader.h
 
 	contains definitions and prototypes
 	for the Hugo Compiler
-
-	Copyright (c) 1995-2006 by Kent Tessman
 */
 
 
 #define HCVERSION 3
-#define HCREVISION 1
+#define HCREVISION 2
 #if !defined (COMPILE_V25)
-#define HCINTERIM ".03"
+#define HCINTERIM ".00"
 #else
-#define HCINTERIM ".03 (2.5)"
+#define HCINTERIM ".00 (2.5)"
 #endif
+
+#define HCVERSION_COMPATIBLE 31
 
 
 #include <ctype.h>
