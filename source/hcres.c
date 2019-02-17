@@ -285,7 +285,7 @@ NextResource:
 			while (read==TRANSFER_BLOCK_SIZE)
 			{
 				read = fread(buf, 1, TRANSFER_BLOCK_SIZE, resource);
-				if (read < 0)
+				if (read < TRANSFER_BLOCK_SIZE && ferror(resource))
 					FatalError(READ_E, resourcepath[i]);
 				if (fwrite(buf, 1, read, resfile) < read)
 					FatalError(WRITE_E, resfilename);
