@@ -608,7 +608,7 @@ void LoadDebuggableFile(void)
 #if defined (DEBUGGER_PRINTFATALERROR)
 		DEBUGGER_PRINTFATALERROR(debug_line);
 #else
-		printf(debug_line);
+                printf("%s", debug_line);
 #endif
 		
 		exit(READ_E);                           /* unable to read */

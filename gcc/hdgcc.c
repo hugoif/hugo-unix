@@ -448,7 +448,7 @@ void debug_setbackcolor(int c)
 
 void debug_hardcopy(FILE *printer, char *a)
 {
-	if (fprintf(printer, a)<0) device_error = true;
+	if (fprintf(printer, "%s", a)<0) device_error = true;
 	if (fprintf(printer, "\n")<0) device_error = true;
 }
 

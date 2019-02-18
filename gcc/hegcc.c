@@ -788,7 +788,9 @@ void ResetXtermDimensions(void)
 }
 	
 void hugo_setgametitle(char *t)
-{}
+{
+        (void)t;
+}
 
 void rectangle(int left, int top, int right, int bottom)
 {
@@ -1294,6 +1296,11 @@ int hugo_hasvideo(void)
 int hugo_playvideo(HUGO_FILE infile, long reslength,
 	char loop_flag, char background, int volume)
 {
+	(void)reslength;
+	(void)loop_flag;
+	(void)background;
+	(void)volume;
+
 	fclose(infile);
 	return true;
 }
@@ -1313,32 +1320,41 @@ int hugo_hasgraphics(void)
 
 int hugo_displaypicture(FILE *infile, long len)
 {
+        (void)len;
         fclose(infile);         /* since infile will be open */
 
         return 1;
 }
 
-#if !defined (SOUND_SUPPORTED)	
-int hugo_playmusic(FILE *f)		/* from hesound.c */
+#if !defined (SOUND_SUPPORTED)
+int hugo_playmusic(HUGO_FILE infile, long reslength, char loop_flag)
 {
-	fclose(f);
+	(void)reslength;
+	(void)loop_flag;
+	fclose(infile);
 	return true;	/* not an error */
 }
 
 void hugo_musicvolume(int vol)
-{}
+{
+        (void)vol;
+}
 
 void hugo_stopmusic(void)
 {}
 
-int hugo_playsample(FILE *f)
+int hugo_playsample(HUGO_FILE infile, long reslength, char loop_flag)
 {
-	fclose(f);
+	(void)reslength;
+	(void)loop_flag;
+	fclose(infile);
 	return true;	/* not an error */
 }
 
 void hugo_samplevolume(int vol)
-{}
+{
+        (void)vol;
+}
 
 void hugo_stopsample(void)
 {}

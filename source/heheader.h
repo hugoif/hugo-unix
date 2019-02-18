@@ -663,7 +663,7 @@ extern void srandom(int);
 #endif
 
 #if !defined (PRINTFATALERROR)
-#define PRINTFATALERROR(a)	fprintf(stderr, a)
+#define PRINTFATALERROR(a)	fprintf(stderr, "%s", a)
 #endif
 
 #ifndef OMIT_EXTRA_STRING_FUNCTIONS

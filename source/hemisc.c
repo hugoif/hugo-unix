@@ -1516,10 +1516,10 @@ signed char def_slbgcolor = DEF_SLBGCOLOR;
 void ParseCommandLine(int argc, char *argv[])
 {
 	char drive[MAXDRIVE], dir[MAXDIR], fname[MAXFILENAME], ext[MAXEXT];
-	char* game_file_arg;
-	int ch;
+	char* game_file_arg = NULL;
 
 #if defined(GCC_UNIX) && defined(DO_COLOR)
+        int ch;
 	/* Parse comand line options (colour switches) */
 	while ((ch = getopt(argc, argv, "f:b:F:B:?h")) != -1) {
 	  switch (ch) {

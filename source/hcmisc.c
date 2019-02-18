@@ -710,7 +710,7 @@ void ParseCommand(int argc, char *argv[])
 
 void PrintErrorLocation(void)
 {
-	char errbuf[256];
+	char errbuf[384];
 
 	/* errline is recorded in the allfile for reading during
 	   Pass2...
