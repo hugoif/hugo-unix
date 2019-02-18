@@ -7,7 +7,7 @@
 
 	for the Hugo Engine
 
-	Copyright (c) 1995-2006 by Kent Tessman
+	Copyright (c) 1995-2009 by Kent Tessman
 */
 
 
@@ -40,7 +40,7 @@ void RunSet(int gotvalue)
 	int a = 0, t = 0, obj = 0;
 	int newl = 0;                   /* new length */
 	int newp = 0;			/* new property val */
-	unsigned int element = 0;		/* of an array */
+	unsigned int element = 0;	/* of an array */
 
 	unsigned short n, m, v;		/* must be 16 bits */
 

@@ -6,10 +6,11 @@
 		Debugger
 		InitDebugger
 		StartDebugger
+		About
 
 	for the Debugger build of the Hugo Engine
 
-	Copyright (c) 1995-2006 by Kent Tessman
+	Copyright (c) 1995-2009 by Kent Tessman
 */
 
 
@@ -575,5 +576,55 @@ void InitDebugger(void)
 	window[VIEW_ALIASES].count = aliases;
 
 	LoadSetupFile();        /* preferences */
+}
+
+/* ABOUT */
+
+void About(void)
+{
+	int l;
+
+	debug_switchscreen(HELP);
+	currently_updating = VIEW_HELP;
+	debug_settextcolor(color[NORMAL_TEXT]);
+	debug_setbackcolor(color[NORMAL_BACK]);
+	debug_clearview(VIEW_HELP);
+
+	sprintf(debug_line, "About the Hugo v%d.%d%s Debugger\n\n", HEVERSION, HEREVISION, HEINTERIM);
+	debug_settextpos(Center(debug_line), 1);
+	debug_settextcolor(color[SELECT_TEXT]);
+	debug_setbackcolor(color[SELECT_BACK]);
+	debug_print(debug_line);
+
+	debug_settextcolor(color[NORMAL_TEXT]);
+	debug_setbackcolor(color[NORMAL_BACK]);
+
+	/* For formatting Help window text: */
+	memset(debug_line, ' ', (size_t)(l = ((window[VIEW_HELP].width-64)/2+4)));
+	debug_line[l] = '\0';
+
+	debug_print(debug_line);
+	debug_print("Written by Kent Tessman\n");
+	debug_print(debug_line);
+	debug_print("Copyright (c) 1995-2009\n");
+	debug_print(debug_line);
+	debug_print("The General Coffee Company Film Productions\n\n");
+	debug_print(debug_line);
+	debug_print("(");
+	debug_print(PORT_NAME);
+	debug_print(" port by ");
+	debug_print(PORTER_NAME);
+	debug_print(")\n\n");
+
+	debug_print(debug_line);
+	debug_print("Select \"Topic\" from the Help menu, then type \"help\".\n");
+
+#if !defined (NO_WINDOW_PROMPTS)
+	debug_windowbottomrow("Press any key...");
+	hugo_getkey();
+	debug_windowbottomrow("");
+
+	debug_switchscreen(DEBUGGER);
+#endif
 }
 

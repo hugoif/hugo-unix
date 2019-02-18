@@ -1,7 +1,7 @@
 /*
 	-------------------------------------------
 	HUGO COMPILER by Kent Tessman
-	Copyright (c) 1995-2006
+	Copyright (c) 1995-2009
 
 	The General Coffee Company Film Productions
 	-------------------------------------------
@@ -82,7 +82,7 @@ int hc_main(int argc, char *argv[])
 
 void Banner(FILE *stream, char *name)
 {
-	fprintf(stream, "HUGO COMPILER v%d.%d%s by Kent Tessman (c) 1995-2006\n", HCVERSION, HCREVISION, HCINTERIM);
+	fprintf(stream, "HUGO COMPILER v%d.%d%s by Kent Tessman (c) 1995-2009\n", HCVERSION, HCREVISION, HCINTERIM);
 	fprintf(stream, "The General Coffee Company Film Productions\n");
 #if defined (PORT_NAME)
 	fprintf(stream, "%s port by %s\n", PORT_NAME, PORTER_NAME);

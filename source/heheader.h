@@ -4,16 +4,16 @@
 	contains definitions and prototypes
 	for the Hugo Engine
 
-	Copyright (c) 1995-2006 by Kent Tessman
+	Copyright (c) 1995-2009 by Kent Tessman
 */
 
 
 #define HEVERSION 3
 #define HEREVISION 1
 #if !defined (COMPILE_V25)
-#define HEINTERIM ".03"
+#define HEINTERIM ".04"
 #else
-#define HEINTERIM ".03 (2.5)"
+#define HEINTERIM ".04 (2.5)"
 #endif
 
 #include <string.h>

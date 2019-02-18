@@ -4,7 +4,7 @@
 	contains definitions and prototypes
 	for the Debugger build of the Hugo Engine
 
-	Copyright (c) 1997-2006 by Kent Tessman
+	Copyright (c) 1997-2009 by Kent Tessman
 */
 
 
@@ -500,6 +500,8 @@ void debug_windowshadow(int left, int top, int right, int bottom);
 
 
 /* hd.c */
+void About(void);
+
 extern char *menu[][MENU_SUBHEADINGS];
 extern struct menu_structure menu_data[];
 extern char menu_shortcut_keys[];
@@ -521,7 +523,6 @@ extern char screen_line[];
 
 
 /* hdmisc.c */
-void About(void);
 void *AllocMemory(size_t size);
 char *CurrentRoutineName(unsigned int addr);
 void DeleteBreakpoint(long baddr);

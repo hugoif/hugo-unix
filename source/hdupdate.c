@@ -23,7 +23,7 @@
 
 	for the Debugger build of the Hugo Engine
 
-	Copyright (c) 1995-2006 by Kent Tessman
+	Copyright (c) 1995-2009 by Kent Tessman
 
 	(Note that these updating functions expect a window to be
 	80+ columns wide and cursor-positionable via screen-coordinates

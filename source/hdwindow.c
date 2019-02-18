@@ -24,7 +24,7 @@
 
 	for the Debugger build of the Hugo Engine
 
-	Copyright (c) 1995-2006 by Kent Tessman
+	Copyright (c) 1995-2009 by Kent Tessman
 
 	This is essentially a drop-in window/menu management system
 	(in conjunction with HDUPDATE.C) that may adapted to an
