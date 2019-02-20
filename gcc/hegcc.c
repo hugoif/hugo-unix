@@ -43,6 +43,10 @@
 #include <curses.h>
 #endif
 
+#ifdef SOUND_AULIB
+#include "audio.h"
+#endif
+
 /* Function prototypes: */
 void hugo_addcommand(void);
 void hugo_restorecommand(int);
@@ -1236,6 +1240,10 @@ int hugo_strlen(char *a)
 
 void hugo_init_screen(void)
 {
+#ifdef SOUND_AULIB
+	initSoundEngine();
+#endif
+
         /*
          * Need to initialize the screen before use by curses
          */
@@ -1284,6 +1292,10 @@ void hugo_cleanup_screen(void)
 	hugo_font(0);
 	hugo_clearfullscreen();
         endwin();
+
+#ifdef SOUND_AULIB
+	closeSoundEngine();
+#endif
 }
 
 
