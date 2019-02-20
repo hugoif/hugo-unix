@@ -188,7 +188,7 @@ hc:	$(HC_OBJS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -o hc $(HC_OBJS)
 
 he: $(AULIB_OBJS) $(HE_OBJS)
-	$(HE_COMPILER) -o he $(HE_OBJS) $(AULIB_OBJS) $(HE_LIBS) -Wl,-O1 -Wl,--as-needed -Wl,--hash-style=gnu -Wl,--sort-common
+	$(HE_COMPILER) -o he $(HE_OBJS) $(AULIB_OBJS) $(HE_LIBS)
 
 hd:	$(HE_OBJS) $(HD_OBJS)
 	$(CC) $(CFLAGS) -o hd $(HE_OBJS) $(HD_OBJS) $(HE_LIBS)
