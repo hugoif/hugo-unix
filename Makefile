@@ -59,9 +59,8 @@ ENABLE_AUDIO?=no
 
 # MOD music format backend (if audio support was enabled above.) Choices are:
 #     mpt     - Uses libopenmpt. Best choice for accuracy and sound quality.
+#     xmp     - Uses Libxmp. Better than modplug.
 #     modplug - Uses libmodplug. Widely available, but not as good.
-#     xmp     - Uses Libxmp. Better than modplug, but has an infinite loop bug
-#               in the currently latest version (4.4.1).
 MOD_BACKEND?=mpt
 
 # Define your optimization flags.  Most compilers understand -O and -O2,
