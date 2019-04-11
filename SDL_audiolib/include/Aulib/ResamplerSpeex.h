@@ -1,22 +1,39 @@
 // This is copyrighted software. More information is at the end of this file.
 #pragma once
 
-// FIXME: That's dumb. We should add actual print functions instead of wrapping the std streams.
-#include <iostream>
+#include <Aulib/Resampler.h>
 
-#ifdef AULIB_DEBUG
-#    include <cassert>
-#    define AM_debugAssert assert
-#    define AM_debugPrint(x) std::cerr << x
-#    define AM_debugPrintLn(x) AM_debugPrint(x) << '\n'
-#else
-#    define AM_debugAssert(x)
-#    define AM_debugPrintLn(x)
-#    define AM_debugPrint(x)
-#endif
+namespace Aulib {
 
-#define AM_warn(x) std::cerr << x
-#define AM_warnLn(x) std::cerr << x << '\n'
+struct ResamplerSpeex_priv;
+
+/*!
+ * \brief Speex resampler.
+ */
+class AULIB_EXPORT ResamplerSpeex: public Resampler
+{
+public:
+    /*!
+     * \param quality
+     *      Speex resampler quality level, from 0 to 10. The value is clamped
+     *      if it lies outside this range. Note that the quality can be changed
+     *      later on if required.
+     */
+    explicit ResamplerSpeex(int quality = 5);
+    ~ResamplerSpeex() override;
+
+    int quality() const noexcept;
+    void setQuality(int quality);
+
+protected:
+    void doResampling(float dst[], const float src[], int& dstLen, int& srcLen) override;
+    int adjustForOutputSpec(int dstRate, int srcRate, int channels) override;
+
+private:
+    const std::unique_ptr<ResamplerSpeex_priv> d;
+};
+
+} // namespace Aulib
 
 /*
 

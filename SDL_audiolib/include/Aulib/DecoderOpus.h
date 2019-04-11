@@ -1,22 +1,34 @@
 // This is copyrighted software. More information is at the end of this file.
 #pragma once
 
-// FIXME: That's dumb. We should add actual print functions instead of wrapping the std streams.
-#include <iostream>
+#include <Aulib/Decoder.h>
 
-#ifdef AULIB_DEBUG
-#    include <cassert>
-#    define AM_debugAssert assert
-#    define AM_debugPrint(x) std::cerr << x
-#    define AM_debugPrintLn(x) AM_debugPrint(x) << '\n'
-#else
-#    define AM_debugAssert(x)
-#    define AM_debugPrintLn(x)
-#    define AM_debugPrint(x)
-#endif
+namespace Aulib {
 
-#define AM_warn(x) std::cerr << x
-#define AM_warnLn(x) std::cerr << x << '\n'
+/*!
+ * \brief libopusfile decoder.
+ */
+class AULIB_EXPORT DecoderOpus: public Decoder
+{
+public:
+    DecoderOpus();
+    ~DecoderOpus() override;
+
+    bool open(SDL_RWops* rwops) override;
+    int getChannels() const override;
+    int getRate() const override;
+    bool rewind() override;
+    std::chrono::microseconds duration() const override;
+    bool seekToTime(std::chrono::microseconds pos) override;
+
+protected:
+    int doDecoding(float buf[], int len, bool& callAgain) override;
+
+private:
+    const std::unique_ptr<struct DecoderOpus_priv> d;
+};
+
+} // namespace Aulib
 
 /*
 

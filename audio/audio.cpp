@@ -4,14 +4,14 @@
 #include <memory>
 #include <unistd.h>
 
-#include "Aulib/AudioDecoderFluidsynth.h"
-#include "Aulib/AudioDecoderModplug.h"
-#include "Aulib/AudioDecoderMpg123.h"
-#include "Aulib/AudioDecoderOpenmpt.h"
-#include "Aulib/AudioDecoderSndfile.h"
-#include "Aulib/AudioDecoderXmp.h"
-#include "Aulib/AudioResamplerSpeex.h"
-#include "Aulib/AudioStream.h"
+#include "Aulib/DecoderFluidsynth.h"
+#include "Aulib/DecoderModplug.h"
+#include "Aulib/DecoderMpg123.h"
+#include "Aulib/DecoderOpenmpt.h"
+#include "Aulib/DecoderSndfile.h"
+#include "Aulib/DecoderXmp.h"
+#include "Aulib/ResamplerSpeex.h"
+#include "Aulib/Stream.h"
 #include "aulib.h"
 
 extern "C" {
@@ -20,21 +20,21 @@ extern "C" {
 #include "rwopsbundle.h"
 #include "soundfont_data.h"
 
-static std::unique_ptr<Aulib::AudioStream>& musicStream()
+static std::unique_ptr<Aulib::Stream>& musicStream()
 {
-    static auto p = std::unique_ptr<Aulib::AudioStream>();
+    static auto p = std::unique_ptr<Aulib::Stream>();
     return p;
 }
 
-static std::unique_ptr<Aulib::AudioStream>& sampleStream()
+static std::unique_ptr<Aulib::Stream>& sampleStream()
 {
-    static auto p = std::unique_ptr<Aulib::AudioStream>();
+    static auto p = std::unique_ptr<Aulib::Stream>();
     return p;
 }
 
-static Aulib::AudioDecoderFluidSynth*& fsynthDec()
+static Aulib::DecoderFluidsynth*& fsynthDec()
 {
-    static Aulib::AudioDecoderFluidSynth* p = nullptr;
+    static Aulib::DecoderFluidsynth* p = nullptr;
     return p;
 }
 
@@ -59,7 +59,7 @@ extern "C" void initSoundEngine()
 
     // Initialize audio with 44.1kHz, 16 bit, 2 channels (stereo) and a 4k chunk size.
     // TODO: Make this configurable?
-    if (Aulib::init(44100, AUDIO_S16SYS, 2, 4096) != 0) {
+    if (not Aulib::init(44100, AUDIO_S16SYS, 2, 4096)) {
         fprintf(stderr, "Unable to initialize audio: %s", SDL_GetError());
         exit(1);
     }
@@ -86,7 +86,7 @@ static bool playStream(HUGO_FILE infile, long reslength, char loop_flag, bool is
     initSoundEngine();
 
     auto& stream = isMusic ? musicStream() : sampleStream();
-    std::unique_ptr<Aulib::AudioDecoder> decoder;
+    std::unique_ptr<Aulib::Decoder> decoder;
 
     if (stream) {
         stream->stop();
@@ -101,11 +101,11 @@ static bool playStream(HUGO_FILE infile, long reslength, char loop_flag, bool is
     }
 
     if (not isMusic) {
-        decoder = std::make_unique<Aulib::AudioDecoderSndfile>();
+        decoder = std::make_unique<Aulib::DecoderSndfile>();
     } else {
         switch (resource_type) {
         case MIDI_R: {
-            auto fsdec = std::make_unique<Aulib::AudioDecoderFluidSynth>();
+            auto fsdec = std::make_unique<Aulib::DecoderFluidsynth>();
             auto* sf2_rwops = SDL_RWFromConstMem(soundfont_data, sizeof(soundfont_data));
             fsdec->loadSoundfont(sf2_rwops);
             fsdec->setGain(0.6f);
@@ -118,18 +118,18 @@ static bool playStream(HUGO_FILE infile, long reslength, char loop_flag, bool is
         case MOD_R: {
             using ModDecoder_type =
 #if USE_DEC_OPENMPT
-                Aulib::AudioDecoderOpenmpt;
+                Aulib::DecoderOpenmpt;
 #elif USE_DEC_XMP
-                Aulib::AudioDecoderXmp;
+                Aulib::DecoderXmp;
 #elif USE_DEC_MODPLUG
-                Aulib::AudioDecoderModPlug;
+                Aulib::DecoderModPlug;
 #endif
             decoder = std::make_unique<ModDecoder_type>();
             fsynthDec() = nullptr;
             break;
         }
         case MP3_R:
-            decoder = std::make_unique<Aulib::AudioDecoderMpg123>();
+            decoder = std::make_unique<Aulib::DecoderMpg123>();
             fsynthDec() = nullptr;
             break;
         default:
@@ -138,8 +138,8 @@ static bool playStream(HUGO_FILE infile, long reslength, char loop_flag, bool is
         }
     }
 
-    stream = std::make_unique<Aulib::AudioStream>(
-        rwops, std::move(decoder), std::make_unique<Aulib::AudioResamplerSpeex>(), true);
+    stream = std::make_unique<Aulib::Stream>(rwops, std::move(decoder),
+                                             std::make_unique<Aulib::ResamplerSpeex>(), true);
     if (stream->open()) {
         // Start playing the stream. Loop forever if 'loop_flag' is true. Otherwise, just play it
         // once.

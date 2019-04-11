@@ -1,22 +1,20 @@
 // This is copyrighted software. More information is at the end of this file.
 #pragma once
+#include "aulib_export.h"
+#include <stddef.h>
 
-// FIXME: That's dumb. We should add actual print functions instead of wrapping the std streams.
-#include <iostream>
-
-#ifdef AULIB_DEBUG
-#    include <cassert>
-#    define AM_debugAssert assert
-#    define AM_debugPrint(x) std::cerr << x
-#    define AM_debugPrintLn(x) AM_debugPrint(x) << '\n'
-#else
-#    define AM_debugAssert(x)
-#    define AM_debugPrintLn(x)
-#    define AM_debugPrint(x)
+#ifdef __cplusplus
+extern "C" {
 #endif
 
-#define AM_warn(x) std::cerr << x
-#define AM_warnLn(x) std::cerr << x << '\n'
+typedef struct SDL_RWops SDL_RWops;
+#define SDL_LoadFile_RW SDL_LoadFile_RW_missing
+
+AULIB_NO_EXPORT void* SDL_LoadFile_RW_missing(SDL_RWops* src, size_t* datasize, int freesrc);
+
+#ifdef __cplusplus
+}
+#endif
 
 /*
 

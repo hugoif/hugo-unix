@@ -6,8 +6,7 @@
 #include <cstring>
 #include <memory>
 
-/*! \private
- *
+/*
  * Simple RAII wrapper for buffers/arrays. More restrictive than std::vector.
  */
 template <typename T>
@@ -106,7 +105,7 @@ private:
 
 /*
 
-Copyright (C) 2014, 2015, 2016, 2017, 2018 Nikos Chantziaras.
+Copyright (C) 2014, 2015, 2016, 2017, 2018, 2019 Nikos Chantziaras.
 
 This file is part of SDL_audiolib.
 

@@ -124,17 +124,16 @@ HD_OBJS = hd.o hddecode.o hdmisc.o hdtools.o hdupdate.o \
     hdval.o hdwindow.o hdgcc.o
 
 ifeq ($(ENABLE_AUDIO), yes)
-    AULIB_OBJS += soundfont_data.o resample.o AudioDecoder.o \
-        AudioDecoderFluidsynth.o AudioDecoderMpg123.o AudioDecoderSndfile.o \
-        AudioResampler.o AudioResamplerSpeex.o AudioStream.o Stream.o \
-        audiostream_p.o aulib.o sampleconv.o rwopsbundle.o audio.o
+    AULIB_OBJS += soundfont_data.o resample.o Decoder.o DecoderFluidsynth.o \
+        DecoderMpg123.o DecoderSndfile.o Resampler.o ResamplerSpeex.o \
+        Stream.o stream_p.o aulib.o sampleconv.o rwopsbundle.o audio.o
 
     AULIB_CPPFLAGS+=-DAULIB_STATIC_DEFINE -DSPX_RESAMPLE_EXPORT= \
         -DRANDOM_PREFIX=SDL_audiolib -DOUTSIDE_SPEEX -DFLOATING_POINT \
         -DSOUND_SUPPORTED -DSOUND_AULIB
 
     AULIB_INCLUDES+=-Iaudio -ISDL_audiolib/include -ISDL_audiolib/src \
-        -ISDL_audiolib/resampler -ISDL_audiolib \
+        -ISDL_audiolib/src/missing -ISDL_audiolib/resampler -ISDL_audiolib \
         $(shell pkg-config --cflags sdl2 sndfile libmpg123 fluidsynth)
 
     AULIB_LIBS+=$(shell pkg-config --libs sdl2 sndfile libmpg123 fluidsynth)
@@ -142,17 +141,17 @@ ifeq ($(ENABLE_AUDIO), yes)
     ifeq ($(MOD_BACKEND), mpt)
         AULIB_CPPFLAGS += -DUSE_DEC_OPENMPT=1
         AULIB_INCLUDES += $(shell pkg-config --cflags libopenmpt)
-        AULIB_OBJS += AudioDecoderOpenmpt.o
+        AULIB_OBJS += DecoderOpenmpt.o
         AULIB_LIBS += $(shell pkg-config --libs libopenmpt)
     else ifeq ($(MOD_BACKEND), xmp)
         AULIB_CPPFLAGS += -DUSE_DEC_XMP=1
         AULIB_INCLUDES += $(shell pkg-config --cflags libxmp)
-        AULIB_OBJS += AudioDecoderXmp.o
+        AULIB_OBJS += DecoderXmp.o
         AULIB_LIBS += $(shell pkg-config --libs libxmp)
     else ifeq ($(MOD_BACKEND), modplug)
         AULIB_CPPFLAGS += -DUSE_DEC_MODPLUG=1
         AULIB_INCLUDES += $(shell pkg-config --cflags libmodplug)
-        AULIB_OBJS += AudioDecoderModplug.o
+        AULIB_OBJS += DecoderModplug.o
         AULIB_LIBS += $(shell pkg-config --libs libmodplug)
     endif
 
