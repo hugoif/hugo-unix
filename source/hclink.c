@@ -405,7 +405,7 @@ void LinkerPass2(void)
 
 long ReadCode(int num)
 {
-	unsigned int a, b = 0;
+	int a, b = 0;
 	long c = 0;
 
 	if ((a = fgetc(linkfile))==EOF && ferror(linkfile))

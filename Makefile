@@ -68,8 +68,8 @@ MOD_BACKEND?=mpt
 #CFLAGS=-Wall -g 
 #CXXFLAGS=-Wall -g
 # Standard optimizations
-CFLAGS?=-pipe -O2 -Wall
-CXXFLAGS?=-pipe -O2 -Wall
+CFLAGS?=-pipe -O2 -Wall -Wextra -pedantic
+CXXFLAGS?=-pipe -O2 -Wall -Wextra -pedantic
 
 # The audio code needs at least C++14.
 CXXFLAGS+=-std=c++14

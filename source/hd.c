@@ -187,15 +187,15 @@ MainEventLoop:
 				event.action = SELECT;
 				event.object = 0;
 
-				/* fall through for DOUBLECLICK */
+				/* fall through */
 
 			case SELECT:
-			{
 				/* If, for example, a function key */
-				if (event.object!=0) goto DoNewAction;
+				if (event.object!=0)
+					goto DoNewAction;
 
-				/* Otherwise, fall through to Navigate() */
-			}
+				/* fall through */
+
 			case KEYPRESS:
 			case DELETE:
 			case MOVE:
@@ -364,10 +364,10 @@ DoNewAction:
 							codeptr = next_codeptr;
 					}
 					debugger_skip = true;
-
-					/* Fall through to RUN_STEP: */
-
 				}
+
+				/* fall through */
+
 				case MENU_RUN + RUN_STEP:
 				{
 RunStep:

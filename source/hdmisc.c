@@ -132,7 +132,7 @@ int CheckinRange(unsigned int val, unsigned int max, char *what)
 {
 	if (runtime_warnings)
 	{
-		if (val < 0 || val > max)
+		if (val > max)
 		{
 			sprintf(debug_line, "%c%s out of range:  %ld", toupper(what[0]), what+1, (long)val);
 			RuntimeWarning(debug_line);

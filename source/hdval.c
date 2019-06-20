@@ -494,15 +494,15 @@ PrintExpressionError:
 				switch (lasttok)
 				{
 					case GREATER_T:
-					  {e[--m] = GREATER_EQUAL_T; break;}
+						e[--m] = GREATER_EQUAL_T; break;
 					case LESS_T:
-					  {e[--m] = LESS_EQUAL_T; break;}
+						e[--m] = LESS_EQUAL_T; break;
 					case TILDE_T:
-					  {e[--m] = NOT_EQUAL_T; break;}
+						e[--m] = NOT_EQUAL_T; break;
 				}
-
-				/* Fall through to default m++ */
 			}
+
+			/* fall through */
 
 			default:  m++;
 		}

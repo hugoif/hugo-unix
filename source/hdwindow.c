@@ -590,7 +590,7 @@ void PrintMenubar(void)
    isn't printed
 */
 	sprintf(debug_line, "Hugo Debugger v%d.%d%s", HEVERSION, HEREVISION, HEINTERIM);
-	while (pos++ <= D_SCREENWIDTH-strlen(debug_line)-1) debug_print(" ");
+	while (pos++ <= D_SCREENWIDTH-(int)strlen(debug_line)-1) debug_print(" ");
 	debug_print(debug_line);
 	pos+=strlen(debug_line)-1;
 #endif

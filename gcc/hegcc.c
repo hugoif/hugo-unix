@@ -434,7 +434,7 @@ GetKey:
 		{
 			if (strlen(buffer)>0)
 			{
-				if (b==KEY_BACKSPACE || c==strlen(buffer))
+				if (b==KEY_BACKSPACE || c==(int)strlen(buffer))
 				{
 					b = KEY_BACKSPACE;
 					if (c==0) goto GetKey;
@@ -592,7 +592,7 @@ RestoreCommand:
 	*/
 	if (game_version<=22 && (b=='^' || b=='~')) goto GetKey;
 
-	if (oldx+strlen(buffer) >= text_windowwidth-2)
+	if (oldx+(int)strlen(buffer) >= text_windowwidth-2)
 		goto GetKey;
 
 	hugo_settextpos(x++, y);
@@ -1033,6 +1033,8 @@ void	hugo_real_attributes_mapper(int attrib, int pairnum)
 	{
 		curs_attr |= COLOR_PAIR(pairnum);
 	}
+#else
+	(void)pairnum;
 #endif
 #ifdef DEBUGGER
 	if (monochrome_mode && debugger_invert)
@@ -1092,6 +1094,8 @@ int find_color_pair(int fgc,int bgc)
 		pair = 0;
 	}
 #else
+	(void)fgc;
+	(void)bgc;
 	pair = 0;
 #endif
 	return	pair;

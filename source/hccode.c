@@ -625,8 +625,10 @@ void CodeLine(void)
 
 			case RETURN_T:
 				expr = 1;
+				/* fall through */
 			case PRINT_T:
 				scolon = true;
+				/* fall through */
 			case PRINTCHAR_T:
 			case WRITEVAL_T:
 			case LOCATE_T:
@@ -668,9 +670,8 @@ void CodeLine(void)
 				expr = 1;
 				condexpr = true;
 				compstart = codeptr;
-
-				/* fall through */
 			}
+			/* fall through */
 			case RUN_T:
 			{
 				eline = 1;
@@ -731,8 +732,10 @@ void CodeLine(void)
 
 			case CHILDREN_T:
 				iline = 1;
+				/* fall through */
 			case PARENT_T:
 				if (t==PARENT_T && word[i+1][0]!='(' && word[1][0]=='*') glegal = 1;
+				/* fall through */
 			case SIBLING_T:
 			case CHILD_T:
 			case YOUNGEST_T:
@@ -866,9 +869,11 @@ void CodeLine(void)
 
 			case ELSE_T:
 				WriteCode(0, 2);
+				/* fall through */
 			case BREAK_T:
 				if (word[i+1][0]=='}' && t==BREAK_T)
 					break;
+				/* fall through */
 			case RUNEVENTS_T:
 			case CLS_T:
 			{
@@ -925,6 +930,8 @@ void CodeLine(void)
 					isneedsval = true;
 				}
 			}
+
+			/* fall through */
 
 			case TILDE_T:
 			case NOT_T:
@@ -1082,6 +1089,7 @@ DoneComma:
 				if (verbskipaddr)
 					WriteCode(0, 1);
 				if (i==1) expr = true, gline = 1;
+				/* fall through */
 			case FORWARD_SLASH_T:
 				glegal = 1;
 				if (word[i-1][0]=='=')
@@ -1146,6 +1154,8 @@ DoneComma:
                                         goto NextWord;
 				}
 
+				/* fall through */
+
 			case GREATER_EQUAL_T:
 			case LESS_EQUAL_T:
 			case NOT_EQUAL_T:
@@ -1179,6 +1189,7 @@ DoneComma:
 			case TRUE_T:
 			case FALSE_T:
 				iline = 1;
+				/* fall through */
 			case CALL_T:
 			{
 				nextt = 0;
@@ -1212,6 +1223,8 @@ DoneComma:
 				if ((!gline) && strcmp(word[1], "print"))
 					Error("Illegal use of 'number'");
 
+				/* fall through */
+
 			case CAPITAL_T:
 			case HEX_T:
 				if (!gline)
@@ -1232,6 +1245,7 @@ DoneComma:
 
 			case STRING_T:
 				glegal = 1;
+				/* fall through */
 			case DICT_T:
 				multipleval = 1;
 				if (!gline)
@@ -1278,11 +1292,14 @@ DoneComma:
 
 			case MOVE_T:
 				moveneedsto = true;
+				/* fall through */
 			case REMOVE_T:
 				eol = true;
+				/* fall through */
 			case JUMP_T:
 				singleval = true;
 				nline = i;
+				/* fall through */
 			case TO_T:
 			{
 				evalue = i;

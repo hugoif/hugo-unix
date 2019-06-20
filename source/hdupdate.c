@@ -866,6 +866,7 @@ void UpdateDebugScreen(void)
 	{
 		case VIEW_LOCALS:
 			win->changed = true;
+			/* fall through */
 		case VIEW_CALLS:
 		case VIEW_WATCH:
 		case VIEW_BREAKPOINTS:
