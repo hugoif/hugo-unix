@@ -129,8 +129,8 @@ ifeq ($(ENABLE_AUDIO), yes)
         Stream.o stream_p.o aulib.o sampleconv.o rwopsbundle.o audio.o
 
     AULIB_CPPFLAGS+=-DAULIB_STATIC_DEFINE -DSPX_RESAMPLE_EXPORT= \
-        -DRANDOM_PREFIX=SDL_audiolib -DOUTSIDE_SPEEX -DFLOATING_POINT \
-        -DSOUND_SUPPORTED -DSOUND_AULIB
+        -DRANDOM_PREFIX=SDL_audiolib -DOUTSIDE_SPEEX -DSOUND_SUPPORTED \
+        -DSOUND_AULIB
 
     AULIB_INCLUDES+=-Iaudio -ISDL_audiolib/include -ISDL_audiolib/src \
         -ISDL_audiolib/src/missing -ISDL_audiolib/resampler -ISDL_audiolib \
