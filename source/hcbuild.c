@@ -67,9 +67,15 @@ void BuildCode(unsigned char from)
 	do
 	{
 		if (full_buffer==1)	/* if the buffer is new...  */
+		{
 			full_buffer = 0;
+		}
 		else			/* ...or else get new words */
+		{
 			GetWords();
+			if (words==0)
+				break;
+		}
 
 		/* Now check to see if we've hit unreachable code; of course,
 		   anything after a label can potentially be jumped to
