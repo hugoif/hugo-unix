@@ -898,7 +898,8 @@ void BuildRoutine(void)
 	/* If any arguments are given, as in "Routine(a, b, c)", then
 	   a, b, and c must be defined as locals. */
 	arguments = 0;
-	if (word[3][0]=='(')		/* count arguments */
+	/* If we have arguments, count them. */
+	if (word[3] != NULL && word[3][0]=='(')
 	{
 		for (i=1; i<3; i++)
 			KillWord(1);
