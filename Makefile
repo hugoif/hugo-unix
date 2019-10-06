@@ -109,7 +109,11 @@ CXX?=c++
 #HE_LIBS+=-lcurses -ltermcap
 #HE_LIBS+=-lcurses -ltermlib
 #HE_LIBS+=-lcurses
-HE_LIBS+=-lncurses
+#HE_LIBS+=-lncurses
+#HE_LIBS+=-lncurses -ltinfo
+# We ask pkg-config for the correct flags. If you don't have pkg-config, you
+# need to comment this out and uncomment one of the above instead.
+HE_LIBS+=$(shell pkg-config --libs ncurses)
 
 # Shouldn't need to change anything below here.
 SOURCE = source
