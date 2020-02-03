@@ -1,4 +1,0 @@
-syntax: glob
-*.o
-syntax: regexp
-^h[cde]

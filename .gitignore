@@ -1,0 +1,7 @@
+*.o
+/hc
+/hd
+/he
+/file2src
+/soundfont_data.cpp
+/soundfont_data.h
