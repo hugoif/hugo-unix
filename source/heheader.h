@@ -11,9 +11,9 @@
 #define HEVERSION 3
 #define HEREVISION 1
 #if !defined (COMPILE_V25)
-#define HEINTERIM ".04"
+#define HEINTERIM ".05"
 #else
-#define HEINTERIM ".04 (2.5)"
+#define HEINTERIM ".05 (2.5)"
 #endif
 
 #include <string.h>
