@@ -39,7 +39,7 @@
 # Note: After looking into this further, it seems that if one runs a
 #	color xterm and sets the TERM environment variable to pcansi,
 #	the color handling works very well (assuming that you use a
-#	background color of black and a forground color of white or gray).
+#	background color of black and a foreground color of white or gray).
 #	The command line to do this is:
 #		color_xterm -bg black -fg white -tn pcansi
 #	or

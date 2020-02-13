@@ -1064,7 +1064,7 @@ void hugo_font(int f)
 	hugo_real_attributes_mapper(real_attributes,current_color_pair);
 }
 
-/* The following local varibles are used to keep track of the current
+/* The following local variables are used to keep track of the current
    foreground and background colors. */
 int local_fore_color= DEF_FCOLOR;
 int local_back_color = DEF_BGCOLOR;

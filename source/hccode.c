@@ -961,7 +961,7 @@ void CodeLine(void)
 
 	/* See if this is an "if x = 1, 2, 3" case, where the comma(s) 
 	   must be replaced by the appropriate "or" or "and", plus the
-	   original comparision (e.g., "x = ").
+	   original comparison (e.g., "x = ").
 
 	   (Somewhat inappropriately for blanket usage, EQUALS_T and
 	   NOT_EQUAL_T are used for differentiation; EQUALS_T usage
