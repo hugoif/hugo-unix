@@ -23,6 +23,7 @@
 
 
 #include "hcheader.h"
+#include <stdlib.h>
 
 
 /* Function prototypes: */

@@ -20,6 +20,7 @@
 
 #include "heheader.h"
 #include "hdheader.h"
+#include <stdlib.h>
 
 
 /* Function prototypes: */

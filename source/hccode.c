@@ -9,6 +9,7 @@
 
 
 #include "hcheader.h"
+#include <stdlib.h>
 
 
 long token_val = 0;		/* from IDWord() */
