@@ -145,14 +145,14 @@ char *strlwr(char *s);
 /* PC Extended-ASCII line-drawing characters (could be replaced
    with regular ASCII characters, i.e., '-', '+', and '|')
 */
-#define HORIZONTAL_LINE         'Ä'
-#define HORIZONTAL_LEFT         'Ã'
-#define HORIZONTAL_RIGHT        '´'
-#define VERTICAL_LINE           '³'
-#define TOP_LEFT                'Ú'
-#define TOP_RIGHT               '¿'
-#define BOTTOM_LEFT             'À'
-#define BOTTOM_RIGHT            'Ù'
+#define HORIZONTAL_LINE         'Ã„'
+#define HORIZONTAL_LEFT         'Ãƒ'
+#define HORIZONTAL_RIGHT        'Â´'
+#define VERTICAL_LINE           'Â³'
+#define TOP_LEFT                'Ãš'
+#define TOP_RIGHT               'Â¿'
+#define BOTTOM_LEFT             'Ã€'
+#define BOTTOM_RIGHT            'Ã™'
 
 #define MENUBAR_KEY "ALT"               /* name of menubar activation key */
 
@@ -348,14 +348,14 @@ void PrintFatalDebuggerError(char *a);
 /* PC Extended-ASCII line-drawing characters (could be replaced
    with regular ASCII characters, i.e., '-', '+', and '|')
 */
-#define HORIZONTAL_LINE         'Ä'
-#define HORIZONTAL_LEFT         'Ã'
-#define HORIZONTAL_RIGHT        '´'
-#define VERTICAL_LINE           '³'
-#define TOP_LEFT                'Ú'
-#define TOP_RIGHT               '¿'
-#define BOTTOM_LEFT             'À'
-#define BOTTOM_RIGHT            'Ù'
+#define HORIZONTAL_LINE         'Ã„'
+#define HORIZONTAL_LEFT         'Ãƒ'
+#define HORIZONTAL_RIGHT        'Â´'
+#define VERTICAL_LINE           'Â³'
+#define TOP_LEFT                'Ãš'
+#define TOP_RIGHT               'Â¿'
+#define BOTTOM_LEFT             'Ã€'
+#define BOTTOM_RIGHT            'Ã™'
 
 #define MENUBAR_KEY "ALT"               /* name of menubar activation key */
 
