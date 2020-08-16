@@ -709,7 +709,7 @@ int LoadGameData(char reload);
 #define MAXSTACKDEPTH    256	/* for nesting {...}		 */
 
 #if !defined (MAXUNDO)
-#define MAXUNDO          256	/* number of undoable operations */
+#define MAXUNDO          4096	/* number of undoable operations */
 #endif
 
 #if !defined (COMPILE_V25)
