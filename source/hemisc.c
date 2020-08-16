@@ -959,7 +959,14 @@ void FileIO(void)
 
 		fref = glk_fileref_create_by_name(fileusage_Data | fileusage_BinaryMode,
 			fileiopath, 0);
-		io = glk_stream_open_file(fref, filemode_Read, 0);
+		if (glk_fileref_does_file_exist(fref))
+		{
+			io = glk_stream_open_file(fref, filemode_Read, 0);
+		}
+		else
+		{
+			io = NULL;
+		}
 		glk_fileref_destroy(fref);
 		if (io==NULL) goto LeaveFileIO;
 #endif
@@ -2081,7 +2088,10 @@ int RecordCommands(void)
 
 				fref = glk_fileref_create_by_prompt(fileusage_InputRecord | fileusage_TextMode,
 					filemode_Read, 0);
-				playback = glk_stream_open_file(fref, filemode_Read, 0);
+				if (glk_fileref_does_file_exist(fref))
+				{
+					playback = glk_stream_open_file(fref, filemode_Read, 0);
+				}
 				glk_fileref_destroy(fref);
 				if (!playback)
 					return 0;
