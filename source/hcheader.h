@@ -11,9 +11,9 @@
 #define HCVERSION 3
 #define HCREVISION 1
 #if !defined (COMPILE_V25)
-#define HCINTERIM ".05"
+#define HCINTERIM ".06"
 #else
-#define HCINTERIM ".05 (2.5)"
+#define HCINTERIM ".06 (2.5)"
 #endif
 
 
