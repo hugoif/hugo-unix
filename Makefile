@@ -71,9 +71,6 @@ MOD_BACKEND?=mpt
 CFLAGS?=-pipe -O2 -Wall -Wextra -pedantic
 CXXFLAGS?=-pipe -O2 -Wall -Wextra -pedantic
 
-# The audio code needs at least C++14.
-CXXFLAGS+=-std=c++14
-
 # If you are using the ncurses package, define NCURSES for the compiler
 CPPFLAGS:=$(CPPFLAGS) $(CFG_OPTIONS) -DNCURSES -DGCC_UNIX -DUSE_TEMPFILES
 
@@ -128,16 +125,26 @@ HD_OBJS = hd.o hddecode.o hdmisc.o hdtools.o hdupdate.o \
     hdval.o hdwindow.o hdgcc.o
 
 ifeq ($(ENABLE_AUDIO), yes)
+    # The audio code needs at least C++17.
+    CXXFLAGS+=-std=c++17
+
     AULIB_OBJS += soundfont_data.o resample.o Decoder.o DecoderFluidsynth.o \
         DecoderMpg123.o DecoderSndfile.o Resampler.o ResamplerSpeex.o \
         Stream.o stream_p.o aulib.o sampleconv.o rwopsbundle.o audio.o
 
-    AULIB_CPPFLAGS+=-DAULIB_STATIC_DEFINE -DSPX_RESAMPLE_EXPORT= \
-        -DRANDOM_PREFIX=SDL_audiolib -DOUTSIDE_SPEEX -DSOUND_SUPPORTED \
-        -DSOUND_AULIB
+    AULIB_CPPFLAGS+= \
+	-DAULIB_STATIC_DEFINE \
+        -DOUTSIDE_SPEEX \
+        -DRANDOM_PREFIX=SDL_audiolib \
+        -DSOUND_AULIB \
+        -DSOUND_SUPPORTED
 
-    AULIB_INCLUDES+=-Iaudio -ISDL_audiolib/include -ISDL_audiolib/src \
-        -ISDL_audiolib/src/missing -ISDL_audiolib/resampler -ISDL_audiolib \
+    AULIB_INCLUDES+= \
+	-ISDL_audiolib/3rdparty/speex_resampler \
+	-ISDL_audiolib/include \
+	-ISDL_audiolib/src \
+	-Iaudio \
+        -ISDL_audiolib \
         $(shell pkg-config --cflags sdl2 sndfile libmpg123 fluidsynth)
 
     AULIB_LIBS+=$(shell pkg-config --libs sdl2 sndfile libmpg123 fluidsynth)
@@ -213,7 +220,7 @@ audio.o: soundfont_data.cpp
 %.o: $(SOURCE)/%.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -o $@ $<
 
-%.o: SDL_audiolib/resampler/%.c
+%.o: SDL_audiolib/3rdparty/speex_resampler/%.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -o $@ $<
 
 %.o: SDL_audiolib/src/%.cpp

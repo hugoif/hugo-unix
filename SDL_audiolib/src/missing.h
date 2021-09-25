@@ -1,34 +1,16 @@
 // This is copyrighted software. More information is at the end of this file.
 #pragma once
+#include <SDL_version.h>
 
-#include <Aulib/Decoder.h>
+#if !SDL_VERSION_ATLEAST(2, 0, 6)
+#    include "missing/sdl_load_file_rw.h"
+#endif
 
-namespace Aulib {
-
-/*!
- * \brief ModPlug decoder.
- */
-class AULIB_EXPORT DecoderModplug: public Decoder
-{
-public:
-    DecoderModplug();
-    ~DecoderModplug() override;
-
-    auto open(SDL_RWops* rwops) -> bool override;
-    auto getChannels() const -> int override;
-    auto getRate() const -> int override;
-    auto rewind() -> bool override;
-    auto duration() const -> std::chrono::microseconds override;
-    auto seekToTime(std::chrono::microseconds pos) -> bool override;
-
-protected:
-    auto doDecoding(float buf[], int len, bool& callAgain) -> int override;
-
-private:
-    const std::unique_ptr<struct DecoderModplug_priv> d;
-};
-
-} // namespace Aulib
+#if !SDL_VERSION_ATLEAST(2, 0, 0)
+#    include "missing/sdl_audio_format.h"
+#    include "missing/sdl_endian_float.h"
+#    include "missing/sdl_rwsize.h"
+#endif
 
 /*
 

@@ -1,38 +1,29 @@
 // This is copyrighted software. More information is at the end of this file.
 #pragma once
-
-#include <Aulib/Decoder.h>
+#include "aulib_config.h"
+#include "aulib_debug.h"
+#include <algorithm>
 
 namespace Aulib {
+namespace priv {
 
-/*!
- * \brief ModPlug decoder.
- */
-class AULIB_EXPORT DecoderModplug: public Decoder
-{
-public:
-    DecoderModplug();
-    ~DecoderModplug() override;
+#if HAVE_STD_CLAMP
+    using std::clamp;
+#else
+    template <typename T>
+    constexpr auto clamp(const T& val, const T& lo, const T& hi) -> const T&
+    {
+        AM_debugAssert(not(hi < lo));
+        return (val < lo) ? lo : (hi < val) ? hi : val;
+    }
+#endif
 
-    auto open(SDL_RWops* rwops) -> bool override;
-    auto getChannels() const -> int override;
-    auto getRate() const -> int override;
-    auto rewind() -> bool override;
-    auto duration() const -> std::chrono::microseconds override;
-    auto seekToTime(std::chrono::microseconds pos) -> bool override;
-
-protected:
-    auto doDecoding(float buf[], int len, bool& callAgain) -> int override;
-
-private:
-    const std::unique_ptr<struct DecoderModplug_priv> d;
-};
-
+} // namespace priv
 } // namespace Aulib
 
 /*
 
-Copyright (C) 2014, 2015, 2016, 2017, 2018, 2019 Nikos Chantziaras.
+Copyright (C) 2021 Nikos Chantziaras.
 
 This file is part of SDL_audiolib.
 

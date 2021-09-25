@@ -1,38 +1,11 @@
 // This is copyrighted software. More information is at the end of this file.
-#pragma once
-
-#include <Aulib/Decoder.h>
-
-namespace Aulib {
-
-/*!
- * \brief XMP decoder.
- */
-class AULIB_EXPORT DecoderXmp: public Decoder
-{
-public:
-    DecoderXmp();
-    ~DecoderXmp() override;
-
-    auto open(SDL_RWops* rwops) -> bool override;
-    auto getChannels() const -> int override;
-    auto getRate() const -> int override;
-    auto rewind() -> bool override;
-    auto duration() const -> std::chrono::microseconds override;
-    auto seekToTime(std::chrono::microseconds pos) -> bool override;
-
-protected:
-    auto doDecoding(float buf[], int len, bool& callAgain) -> int override;
-
-private:
-    const std::unique_ptr<struct DecoderXmp_priv> d;
-};
-
-} // namespace Aulib
+#define DR_FLAC_IMPLEMENTATION
+#define DR_FLAC_NO_STDIO
+#include "dr_flac.h"
 
 /*
 
-Copyright (C) 2014, 2015, 2016, 2017, 2018, 2019 Nikos Chantziaras.
+Copyright (C) 2021 Nikos Chantziaras.
 
 This file is part of SDL_audiolib.
 

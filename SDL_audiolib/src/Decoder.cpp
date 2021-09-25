@@ -3,6 +3,9 @@
 
 #include "Aulib/DecoderAdlmidi.h"
 #include "Aulib/DecoderBassmidi.h"
+#include "Aulib/DecoderDrflac.h"
+#include "Aulib/DecoderDrmp3.h"
+#include "Aulib/DecoderDrwav.h"
 #include "Aulib/DecoderFluidsynth.h"
 #include "Aulib/DecoderModplug.h"
 #include "Aulib/DecoderMpg123.h"
@@ -36,7 +39,7 @@ Aulib::Decoder::Decoder()
 
 Aulib::Decoder::~Decoder() = default;
 
-std::unique_ptr<Aulib::Decoder> Aulib::Decoder::decoderFor(const std::string& filename)
+auto Aulib::Decoder::decoderFor(const std::string& filename) -> std::unique_ptr<Aulib::Decoder>
 {
     auto rwopsClose = [](SDL_RWops* rwops) { SDL_RWclose(rwops); };
     std::unique_ptr<SDL_RWops, decltype(rwopsClose)> rwops(SDL_RWFromFile(filename.c_str(), "rb"),
@@ -44,19 +47,24 @@ std::unique_ptr<Aulib::Decoder> Aulib::Decoder::decoderFor(const std::string& fi
     return Decoder::decoderFor(rwops.get());
 }
 
-std::unique_ptr<Aulib::Decoder> Aulib::Decoder::decoderFor(SDL_RWops* rwops)
+auto Aulib::Decoder::decoderFor(SDL_RWops* rwops) -> std::unique_ptr<Aulib::Decoder>
 {
     const auto rwPos = SDL_RWtell(rwops);
 
     auto rewindRwops = [rwops, rwPos] { SDL_RWseek(rwops, rwPos, RW_SEEK_SET); };
 
-    auto tryDecoder = [rwops, &rewindRwops](auto dec) {
+    [[maybe_unused]] auto tryDecoder = [rwops, &rewindRwops](auto dec) {
         rewindRwops();
         bool ret = dec->open(rwops);
         rewindRwops();
         return ret;
     };
 
+#if USE_DEC_DRFLAC
+    if (tryDecoder(std::make_unique<DecoderDrflac>())) {
+        return std::make_unique<Aulib::DecoderDrflac>();
+    }
+#endif
 #if USE_DEC_LIBVORBIS
     if (tryDecoder(std::make_unique<DecoderVorbis>())) {
         return std::make_unique<Aulib::DecoderVorbis>();
@@ -97,6 +105,11 @@ std::unique_ptr<Aulib::Decoder> Aulib::Decoder::decoderFor(SDL_RWops* rwops)
         return std::make_unique<Aulib::DecoderSndfile>();
     }
 #endif
+#if USE_DEC_DRWAV
+    if (tryDecoder(std::make_unique<DecoderDrwav>())) {
+        return std::make_unique<Aulib::DecoderDrwav>();
+    }
+#endif
 #if USE_DEC_OPENMPT
     if (tryDecoder(std::make_unique<DecoderOpenmpt>())) {
         return std::make_unique<Aulib::DecoderOpenmpt>();
@@ -113,15 +126,22 @@ std::unique_ptr<Aulib::Decoder> Aulib::Decoder::decoderFor(SDL_RWops* rwops)
     // file, which would result in virtually everything we feed it giving a
     // false positive.
 #endif
+
+// The MP3 decoders have too many false positives. So try them last.
 #if USE_DEC_MPG123
     if (tryDecoder(std::make_unique<DecoderMpg123>())) {
         return std::make_unique<Aulib::DecoderMpg123>();
     }
 #endif
+#if USE_DEC_DRMP3
+    if (tryDecoder(std::make_unique<DecoderDrmp3>())) {
+        return std::make_unique<Aulib::DecoderDrmp3>();
+    }
+#endif
     return nullptr;
 }
 
-bool Aulib::Decoder::isOpen() const
+auto Aulib::Decoder::isOpen() const -> bool
 {
     return d->isOpen;
 }
@@ -129,10 +149,10 @@ bool Aulib::Decoder::isOpen() const
 // Conversion happens in-place.
 static constexpr void monoToStereo(float buf[], int len)
 {
-    if (len < 1 or buf == nullptr) {
+    if (len < 1 or not buf) {
         return;
     }
-    for (int i = len / 2 - 1, j = len - 1; i > 0; --i) {
+    for (int i = len / 2 - 1, j = len - 1; i >= 0; --i) {
         buf[j--] = buf[i];
         buf[j--] = buf[i];
     }
@@ -140,7 +160,7 @@ static constexpr void monoToStereo(float buf[], int len)
 
 static constexpr void stereoToMono(float dst[], const float src[], int srcLen)
 {
-    if (srcLen < 1 or dst == nullptr or src == nullptr) {
+    if (srcLen < 1 or not dst or not src) {
         return;
     }
     for (int i = 0, j = 0; i < srcLen; i += 2, ++j) {
@@ -149,7 +169,7 @@ static constexpr void stereoToMono(float dst[], const float src[], int srcLen)
     }
 }
 
-int Aulib::Decoder::decode(float buf[], int len, bool& callAgain)
+auto Aulib::Decoder::decode(float buf[], int len, bool& callAgain) -> int
 {
     if (this->getChannels() == 1 and Aulib::channelCount() == 2) {
         int srcLen = this->doDecoding(buf, len / 2, callAgain);
