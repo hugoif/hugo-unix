@@ -17,7 +17,7 @@
 
 #include <windows.h>
 #include "glk.h"
-#include "winglk.h"
+#include "WinGlk.h"
 
 #undef isascii
 #define isascii (1)
@@ -125,7 +125,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	SetErrorMode(SEM_NOOPENFILEERRORBOX);
 
 	/* Call the Windows specific initialization routine */
-	if (winglk_startup_code() != 0)
+	if (winglk_startup_code(lpCmdLine) != 0)
 	{
 		frefid_t fref;
 
@@ -156,7 +156,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	return 0;
 }
 
-int winglk_startup_code(void)
+int winglk_startup_code(const char *cmdline)
 {
 	winglk_app_set_name("Hugo Engine");
 	return 1;
@@ -257,7 +257,7 @@ void GetCurrentDirectories(void)
 {
 	HKEY hkey;
 	DWORD type;
-	size_t size;
+	DWORD size;
 
 	if (RegOpenKey(HKEY_CURRENT_USER,
 		"Software\\General Coffee Co.\\Hugo\\Engine",
